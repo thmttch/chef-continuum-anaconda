@@ -10,4 +10,8 @@
 
 # Author
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+# TODO
+
+- autodetect 64-bit versus 32
+
+Author:: Matt Chu (matt.chu@gmail.com)
