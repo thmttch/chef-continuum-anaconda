@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+rspec
+rspec_result=$?
+
+# this will take a long time
+kitchen verify
+kitchen_result=$?
+kitchen destroy
+
+if [[ ${rspec_result} -eq 0 ]] && [[ ${kitchen_result} -eq 0 ]]; then
+  exit 0
+fi
+exit 1

@@ -10,27 +10,26 @@
 include_recipe 'apt::default'
 include_recipe 'python::default'
 
-anaconda_install_dir = node.anaconda.install_root
-add_to_shell_path = node.anaconda.add_to_shell_path
 version = node.anaconda.version
 flavor = node.anaconda.flavor
-installer = "Anaconda-#{version}-Linux-#{flavor}.sh"
-Chef::Log.debug "installer = #{installer}"
-debconf_template = "anaconda-debconf"
-debconf_template_path = "#{Chef::Config[:file_cache_path]}/#{debconf_template}"
 
-remote_file "#{Chef::Config[:file_cache_path]}/#{installer}" do
+anaconda_install_dir = "#{node.anaconda.install_root}/#{version}"
+add_to_shell_path = node.anaconda.add_to_shell_path
+installer = "Anaconda-#{version}-Linux-#{flavor}.sh"
+installer_path = "#{Chef::Config[:file_cach_path]}/#{installer}"
+installer_config = 'installer_config'
+installer_config_path = "#{Chef::Config[:file_cache_path]}/#{installer_config}"
+
+Chef::Log.debug "installer = #{installer}"
+
+remote_file installer_path do
   source "http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/#{installer}"
   checksum node.anaconda.installer[version][flavor]
   notifies :run, 'bash[run anaconda installer]', :delayed
 end
 
-#template "#{Chef::Config[:file_cache_path]}/#{installer}.debconf" do
-template debconf_template_path do
-  source "#{debconf_template}.erb"
-  #owner
-  #group
-  #mode
+template installer_config_path do
+  source "#{installer_config}.erb"
   variables({
     :version => version,
     :flavor => flavor,
@@ -39,9 +38,16 @@ template debconf_template_path do
   })
 end
 
+directory node.anaconda.install_root do
+  owner node.anaconda.owner
+  group node.anaconda.group
+  recursive true
+end
+
 bash 'run anaconda installer' do
-  code "cat #{debconf_template_path} | bash #{Chef::Config[:file_cache_path]}/#{installer}"
-  #action :run
-  action :nothing
+  code "cat #{installer_config_path} | bash #{installer_path}"
+  user node.anaconda.owner
+  group node.anaconda.group
+  action :run
   not_if { File.directory?(anaconda_install_dir) }
 end

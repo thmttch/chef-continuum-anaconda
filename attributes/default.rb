@@ -1,4 +1,4 @@
-default.anaconda.version = '1.8.0'
+default.anaconda.version = '1.9.2'
 default.anaconda.flavor = 'x86'
 default.anaconda.installer = {
   '1.8.0' => {
@@ -11,5 +11,10 @@ default.anaconda.installer = {
   },
 }
 
+# specific versions are installed _under_ this directory
 default.anaconda.install_root = '/opt/anaconda'
-default.anaconda.add_to_shell_path = true
+# setting this to true is not recommended; if the installation dir changes the path won't change
+default.anaconda.add_to_shell_path = false
+
+default.anaconda.owner = 'vagrant'
+default.anaconda.group = 'vagrant'
