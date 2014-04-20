@@ -14,7 +14,7 @@ version = node.anaconda.version
 flavor = node.anaconda.flavor
 
 anaconda_install_dir = "#{node.anaconda.install_root}/#{version}"
-add_to_shell_path = node.anaconda.add_to_shell_path
+#add_to_shell_path = node.anaconda.add_to_shell_path
 installer = "Anaconda-#{version}-Linux-#{flavor}.sh"
 installer_path = "#{Chef::Config[:file_cach_path]}/#{installer}"
 installer_config = 'installer_config'
@@ -34,7 +34,8 @@ template installer_config_path do
     :version => version,
     :flavor => flavor,
     :anaconda_install_dir => anaconda_install_dir,
-    :add_to_shell_path => add_to_shell_path ? 'yes' : 'no',
+    :accept_license => node.anaconda.accept_license,
+    :add_to_shell_path => node.anaconda.add_to_shell_path ? 'yes' : 'no',
   })
 end
 
