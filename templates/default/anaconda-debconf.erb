@@ -1,0 +1,24 @@
+<%#
+The questions are:
+# In order to continue the installation process, please review the license
+# agreement.  Please, press ENTER to continue
+'',
+# Do you approve the license terms? [yes|no]
+'yes',
+# Anaconda will now be installed into this location:
+# /home/blah/anaconda
+#  - Press ENTER to confirm the location
+#  - Press CTRL-C to abort the installation
+#  - Or specify an different location below
+anaconda_install_dir,
+# Do you wish the installer to prepend the Anaconda install location to PATH in your /home/vagrant/.bashrc ? [yes|no]
+add_to_shell_path ? 'yes' : 'no'
+%>
+<%- case "#{@version}-#{@flavor}" %>
+<%- when 'nothing here because no exceptions between different installers' %>
+<%- else %>
+
+ yes
+<%= @anaconda_install_dir %>
+<%= @add_to_shell_path %>
+<%- end %>

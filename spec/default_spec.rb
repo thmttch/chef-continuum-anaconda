@@ -46,7 +46,7 @@ shared_examples 'general tests' do |platform, version|
     end
     #subject { chef_run }
 
-    it 'runs without errors; anything else is untestable. see test-kitchen tests' do
+    it 'runs without errors. see test-kitchen tests for more comprehensive tests not possible here' do
       #default.anaconda.install_root = '/opt/anaconda'
       chef_run.converge(described_recipe)
 
@@ -55,10 +55,14 @@ shared_examples 'general tests' do |platform, version|
       #expect(chef_run).to create_directory chef_run.node.anaconda.install_root
     end
 
-    #it 'installs python' do
-      ##should install_package 'foo'
-      #expect(chef_run).to include_recipe 'python::default'
-    #end
+    it 'generates the installer template correctly' do
+      chef_run.converge(described_recipe)
+
+      # must be exactly 4 lines
+      debconf_template = "anaconda-debconf"
+      debconf_template_path = "#{Chef::Config[:file_cache_path]}/#{debconf_template}"
+      expect(chef_run).to render_file(debconf_template_path).with_content(/.*\n.*\n.*\n.*/)
+    end
 
     #it "creates specified users" do
       ##users.each { |u| expect(chef_run).to create_user u }
