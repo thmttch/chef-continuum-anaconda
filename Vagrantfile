@@ -1,11 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
-  config.vm.hostname = "chef-continuum-anaconda-berkshelf"
-  config.vm.box = "precise32"
-  config.vm.box_url = "http://files.vagrantup.com/precise32.box"
-  config.vm.network :private_network, ip: "33.33.33.123"
+Vagrant.configure('2') do |config|
+  config.vm.hostname = 'chef-continuum-anaconda-berkshelf'
+  config.vm.box = 'precise32'
+  config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
+  config.vm.network :private_network, ip: '33.33.33.123'
 
   # ssh
   config.ssh.forward_x11 = true
@@ -17,7 +17,8 @@ Vagrant.configure("2") do |config|
 
   # provisioning
 
-  # anaconda's big, so put it in the cache for development
+  # dev optimization: anaconda's big, so put it in the cache for development if
+  # it's already been downloaded
   [
     'Anaconda-1.8.0-Linux-x86.sh',
     'Anaconda-1.8.0-Linux-x86_64.sh',
@@ -25,9 +26,8 @@ Vagrant.configure("2") do |config|
     'Anaconda-1.9.2-Linux-x86_64.sh',
   ].each do |f|
     if File.exists?(f)
-      #config.trigger.before [ :provision ], :execute => "bash -c 'cp /vagrant/Anaconda-1.8.0-Linux-x86.sh /var/chef/cache'", :stdout => true
       config.vm.provision :shell do |shell|
-        shell.inline = "if [[ ! -f $1 ]]; then cp $1 $2; fi"
+        shell.inline = 'if [[ ! -f $1 ]]; then cp $1 $2; fi'
         shell.args = [ "/vagrant/#{f}",  '/var/chef/cache' ]
       end
     end
@@ -36,13 +36,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :anaconda => {
-        :version => '1.8.0',
+        :version => '1.9.2',
         :flavor => 'x86',
       }
     }
 
     chef.run_list = [
-        "recipe[chef-continuum-anaconda::default]"
+      'recipe[chef-continuum-anaconda::default]',
     ]
   end
 end
