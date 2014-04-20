@@ -20,7 +20,7 @@ puts installer
 remote_file "#{Chef::Config[:file_cache_path]}/#{installer}" do
   source "http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/#{installer}"
   checksum node.anaconda.installer[version][flavor]
-  notifies :run, 'bash[run anaconda installer]', :delayed
+  #notifies :run, 'bash[run anaconda installer]', :delayed
 end
 
 bash 'run anaconda installer' do
@@ -33,8 +33,8 @@ yes
 #{add_to_shell_path ? 'yes' : 'no'}
 STDIN
 EOS
-  #not_if { File.exists?(anaconda_install_dir) }
-  action :nothing
+  action :run
+  not_if { File.directory?(anaconda_install_dir) }
 end
 
 =begin

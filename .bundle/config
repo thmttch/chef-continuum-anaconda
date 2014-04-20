@@ -1,0 +1,3 @@
+---
+BUNDLE_BUILD__PG: "--enable-bundled-libyaml"
+BUNDLE_BUILD__PSYCH: "--enable-bundled-libyaml"
