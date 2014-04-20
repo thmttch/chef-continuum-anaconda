@@ -12,15 +12,32 @@ writing, maintaining, and testing Chef cookbooks:
 - [Vagrant](https://www.vagrantup.com) for development
 - [Chefspec](https://github.com/sethvargo/chefspec) for rapid testing
 - [Test Kitchen](https://github.com/test-kitchen/test-kitchen) for
-  comprehensive testing across multiple platforms
+comprehensive testing across multiple platforms, with tests written in
+[serverspec](http://serverspec.org/)
 - [Foodcritic](http://acrmp.github.io/foodcritic/) for style checking
 
-# Requirements
+## Requirements
 
 - Chef 11.x
 - [Chef-DK](http://www.getchef.com/downloads/chef-dk/)?
+- Vagrant 1.4+
 
-# Usage, recipes, and attributes
+## Quickstart
+
+The [Vagrantfile](Vagrantfile) is written to get you an Anaconda environment
+with minimal effort:
+
+```bash
+$> vagrant up --provision
+...
+
+$> vagrant ssh
+$vagrant> export PATH=/opt/anaconda/1.9.2/bin:${PATH}
+$vagrant> conda --version
+conda 3.4.1
+```
+
+## Usage, recipes, and attributes
 
 This cookbook only has one recipe: `chef-continuum-anaconda::default`. Include
 it in your runlist, and it will install the package as well as any necessary
@@ -41,7 +58,7 @@ The following are user-configurable attributes. Check
   - `owner`: the user who owns the install
   - `group`: the group who owns the install
 
-# Tests
+## Tests
 
 Run the full test suite:
 
@@ -60,7 +77,7 @@ Run just the [chefspecs](spec/default_spec.rb):
 $> rspec
 ```
 
-Run just the test kitchen [integration
+Run just the test kitchen serverspec [integration
 tests](test/integration/default/serverspec/default_spec.rb):
 
 ```bash
@@ -73,10 +90,10 @@ Check the style with [Foodcritic](http://acrmp.github.io/foodcritic/):
 $> foodcritic
 ```
 
-# TODO
+## TODO
 
 - autodetect 64-bit versus 32
 
-# Author
+## Author
 
 Author:: Matt Chu (matt.chu@gmail.com)

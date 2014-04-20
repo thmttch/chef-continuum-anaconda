@@ -15,7 +15,7 @@ default.anaconda.installer = {
 default.anaconda.install_root = '/opt/anaconda'
 default.anaconda.accept_license = 'no'
 # setting this to true is not recommended; if the installation dir changes the path won't change
-default.anaconda.add_to_shell_path = false
+#default.anaconda.add_to_shell_path = false
 
 default.anaconda.owner = 'vagrant'
 default.anaconda.group = 'vagrant'
