@@ -15,7 +15,8 @@ shared_examples 'general tests' do |platform, version|
     it 'runs without errors. see test-kitchen tests for more comprehensive tests not possible here' do
       chef_run.converge(described_recipe)
 
-      expect(chef_run).to include_recipe 'python::default'
+      expect(chef_run).to include_recipe('python::default')
+      expect(chef_run).to run_bash('run anaconda installer')
     end
 
     it 'generates the installer template correctly' do
@@ -33,8 +34,6 @@ end
 describe 'chef-continuum-anaconda::default' do
   platforms = {
     'ubuntu'   => [ '12.04', '13.04', '13.10' ],
-    #'ubuntu'   => [ '12.04' ],
-
     #'debian'   => ['6.0.5'],
     #'centos'   => ['5.8', '6.0', '6.3'],
     #'redhat'   => ['5.8', '6.3'],

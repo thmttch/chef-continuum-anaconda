@@ -11,12 +11,8 @@ end
 
 describe 'general tests' do
 
-  #it "is listening on port 9418" do
-    #expect(port(9418)).to be_listening
-  #end
-
-  #it "has a running service of git-daemon" do
-    #expect(service("git-daemon")).to be_running
-  #end
+  it 'installs conda' do
+    command('/opt/anaconda/1.9.2/bin/conda --version').should return_stdout 'conda 3.4.1'
+  end
 
 end

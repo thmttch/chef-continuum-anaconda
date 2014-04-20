@@ -36,8 +36,11 @@ Vagrant.configure('2') do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :anaconda => {
-        :version => '1.9.2',
-        :flavor => 'x86',
+        #:version => '1.9.2',
+        #:flavor => 'x86',
+        :accept_license => 'yes',
+        # explicitly set for quickstart convenience only
+        #:add_to_shell_path => true,
       }
     }
 
