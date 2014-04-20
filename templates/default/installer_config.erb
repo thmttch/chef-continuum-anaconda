@@ -18,7 +18,8 @@ add_to_shell_path ? 'yes' : 'no'
 <%- when 'nothing here because no exceptions between different installers' %>
 <%- else %>
 
- yes
+<%# note the leading space below; it's necessary to get through the license agreement %>
+ <%= @accept_license %>
 <%= @anaconda_install_dir %>
 <%= @add_to_shell_path %>
 <%- end %>

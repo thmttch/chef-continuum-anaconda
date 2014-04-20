@@ -16,7 +16,8 @@ writing, maintaining, and testing Chef cookbooks:
 
 # Requirements
 
-Chef 11.x
+- Chef 11.x
+- [Chef-DK](http://www.getchef.com/downloads/chef-dk/)?
 
 # Usage, recipes, and attributes
 
@@ -28,9 +29,11 @@ The following are user-configurable attributes. Check [attributes/default.rb](at
 
 - `anaconda`
   - `version`: the version to install
-  - `flavor`: either 'x86' (32-bit) or 'x86_64' (64-bit)
+  - `flavor`: either `x86` (32-bit) or `x86_64` (64-bit)
   - `install_root`: the parent directory of all anaconda installs. note that installs go into `#{install_root}/#{version}`
-  - `add_to_shell_path`: TODO
+  - `accept_license`: must be explicitly set to the string `yes`; any other value will reject the license.
+  - `add_to_shell_path`: edit the owner's shell profile to include anaconda in
+    PATH. This is not recommended as it cannot be managed by this cookbook.
   - `owner`: the user who owns the install
   - `group`: the group who owns the install
 

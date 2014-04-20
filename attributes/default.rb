@@ -13,6 +13,7 @@ default.anaconda.installer = {
 
 # specific versions are installed _under_ this directory
 default.anaconda.install_root = '/opt/anaconda'
+default.anaconda.accept_license = 'no'
 # setting this to true is not recommended; if the installation dir changes the path won't change
 default.anaconda.add_to_shell_path = false
 
