@@ -36,7 +36,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :anaconda => {
-        :version => '1.9.2'
+        :version => '1.8.0',
+        :flavor => 'x86',
       }
     }
 
