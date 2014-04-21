@@ -37,6 +37,12 @@ $vagrant> conda --version
 conda 3.4.1
 ```
 
+To use it in a cookbook:
+
+```ruby
+include_recipe 'chef-continuum-anaconda::default'j
+```
+
 ## Usage, recipes, and attributes
 
 This cookbook only has one recipe: `chef-continuum-anaconda::default`. Include
@@ -63,7 +69,7 @@ The following are user-configurable attributes. Check
 Run the full test suite:
 
 ```bash
-# this will take a long time
+# this will take a really long time
 $> script/cibuild
 ...
 
@@ -81,7 +87,8 @@ Run just the test kitchen serverspec [integration
 tests](test/integration/default/serverspec/default_spec.rb):
 
 ```bash
-$> rspec
+# this is what takes so long: every platform and version is fully built in vagrant
+$> kitchen verify
 ```
 
 Check the style with [Foodcritic](http://acrmp.github.io/foodcritic/):
@@ -90,9 +97,25 @@ Check the style with [Foodcritic](http://acrmp.github.io/foodcritic/):
 $> foodcritic
 ```
 
+## Releases and issues
+
+Standard stuff:
+
+- master is the active version in development
+- releases are [made with
+  Github](https://github.com/thmttch/chef-continuum-anaconda/releases), and
+  `git tag`'ed
+
+Issues should be [opened in the Github issue
+tracker](https://github.com/thmttch/chef-continuum-anaconda/issues)
+
 ## TODO
 
 - autodetect 64-bit versus 32
+- (TODO does it matter? who uses it?) populate metadata.rb: `suggests`,
+  `supports`, etc
+- add a pre-provision for kitchen tests to avoid redownloading the installer on
+  every test (really slows down the tests)
 
 ## Author
 
