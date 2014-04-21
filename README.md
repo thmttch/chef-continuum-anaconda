@@ -114,6 +114,8 @@ tracker](https://github.com/thmttch/chef-continuum-anaconda/issues)
   `supports`, etc
 - add a pre-provision for kitchen tests to avoid redownloading the installer on
   every test (really slows down the tests)
+- figure out how to publish onto http://community.opscode.com/; the
+  documentation is unbelievably bad
 
 ## Author
 
