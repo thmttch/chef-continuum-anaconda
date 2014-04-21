@@ -29,7 +29,7 @@ shared_examples 'general tests' do |platform, version|
   end
 end
 
-describe 'chef-continuum-anaconda::default' do
+describe 'anaconda::default' do
   platforms = {
     # for whatever reason there's no fauxhai data for 12.10
     'ubuntu' => [ '12.04', '13.04', '13.10' ],

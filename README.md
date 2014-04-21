@@ -1,4 +1,4 @@
-# chef-continuum-anaconda cookbook
+# anaconda cookbook
 
 Chef cookbook for installing [Continuum Analytic](http://continuum.io/)'s
 [Anaconda](https://store.continuum.io/cshop/anaconda/): "completely free Python
@@ -40,12 +40,12 @@ conda 3.4.1
 To use it in a cookbook:
 
 ```ruby
-include_recipe 'chef-continuum-anaconda::default'j
+include_recipe 'anaconda::default'
 ```
 
 ## Usage, recipes, and attributes
 
-This cookbook only has one recipe: `chef-continuum-anaconda::default`. Include
+This cookbook only has one recipe: `anaconda::default`. Include
 it in your runlist, and it will install the package as well as any necessary
 dependencies.
 
@@ -59,8 +59,6 @@ The following are user-configurable attributes. Check
     individual installs go into `#{install_root}/#{version}`
   - `accept_license`: must be explicitly set to the string `yes`; any other
     value will reject the license.
-  - `add_to_shell_path`: edit the owner's shell profile to include anaconda in
-    `PATH`. This is not recommended as then cannot be managed by this cookbook.
   - `owner`: the user who owns the install
   - `group`: the group who owns the install
 
