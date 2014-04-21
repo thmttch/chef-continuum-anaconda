@@ -1,6 +1,5 @@
 require 'chefspec'
 require 'chefspec/berkshelf'
-#require 'chefspec/server'
 require 'spec_helper.rb'
 
 shared_examples 'general tests' do |platform, version|
@@ -30,13 +29,13 @@ shared_examples 'general tests' do |platform, version|
   end
 end
 
-#describe 'foo::default' do
 describe 'chef-continuum-anaconda::default' do
   platforms = {
-    'ubuntu'   => [ '12.04', '13.04', '13.10' ],
-    #'debian'   => ['6.0.5'],
-    #'centos'   => ['5.8', '6.0', '6.3'],
-    #'redhat'   => ['5.8', '6.3'],
+    # for whatever reason there's no fauxhai data for 12.10
+    'ubuntu' => [ '12.04', '13.04', '13.10' ],
+    'debian' => [ '6.0.5' ],
+    'centos' => [ '5.8', '6.0', '6.3' ],
+    'redhat' => [ '5.8', '6.3' ],
   }
 
   platforms.each do |platform, versions|

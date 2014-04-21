@@ -9,9 +9,9 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
-  #- name: ubuntu-12.10
-  #- name: ubuntu-13.04
-  #- name: ubuntu-13.10
+  - name: ubuntu-12.10
+  - name: ubuntu-13.04
+  - name: ubuntu-13.10
 
 suites:
   - name: default
@@ -19,6 +19,5 @@ suites:
       - recipe[chef-continuum-anaconda::default]
     attributes:
       anaconda:
-        #version: '1.8.0'
         flavor: 'x86_64'
         accept_license: 'yes'
