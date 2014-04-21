@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: chef-continuum-anaconda
+# Cookbook Name:: anaconda
 # Recipe:: default
 #
 # Copyright (C) 2014 Matt Chu
@@ -34,7 +34,6 @@ template installer_config_path do
     :flavor => flavor,
     :anaconda_install_dir => anaconda_install_dir,
     :accept_license => node.anaconda.accept_license,
-    #:add_to_shell_path => node.anaconda.add_to_shell_path ? 'yes' : 'no',
     :add_to_shell_path => 'no',
   })
 end

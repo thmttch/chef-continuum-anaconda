@@ -16,7 +16,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[chef-continuum-anaconda::default]
+      - recipe[anaconda::default]
     attributes:
       anaconda:
         flavor: 'x86_64'

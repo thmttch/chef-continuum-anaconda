@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
-  config.vm.hostname = 'chef-continuum-anaconda-berkshelf'
+  config.vm.hostname = 'anaconda-berkshelf'
   config.vm.box = 'precise32'
   config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
   config.vm.network :private_network, ip: '33.33.33.123'
@@ -39,13 +39,11 @@ Vagrant.configure('2') do |config|
         #:version => '1.9.2',
         #:flavor => 'x86',
         :accept_license => 'yes',
-        # explicitly set for quickstart convenience only
-        #:add_to_shell_path => true,
       }
     }
 
     chef.run_list = [
-      'recipe[chef-continuum-anaconda::default]',
+      'recipe[anaconda::default]',
     ]
   end
 end
