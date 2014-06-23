@@ -3,7 +3,8 @@
 rspec
 rspec_result=$?
 
-# this will take a long time
+kitchen destroy
+# this will take a very long time, and lots of disk space
 kitchen verify
 kitchen_result=$?
 kitchen destroy

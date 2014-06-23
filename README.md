@@ -18,9 +18,19 @@ comprehensive testing across multiple platforms, with tests written in
 
 ## Requirements
 
-- Chef 11.x
-- [Chef-DK](http://www.getchef.com/downloads/chef-dk/)?
-- Vagrant 1.4+
+This repo has only been tested with RVM; YMMV with other installation methods (rbenv, chef-dk, etc).
+
+- Berkshelf 3.1.3
+- Chefspec 4.0.0
+- Test Kitchen 1.2.1
+- Foodcritic 4.0.0
+- Vagrant 1.6+
+  - [vagrant-omnibus](https://github.com/schisamo/vagrant-omnibus)
+  - [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshelf): note that `>= 2.0.1` is required
+
+It sounds like [Chef-DK](http://www.getchef.com/downloads/chef-dk/) is the new
+recommended installation path, but I have not had a good experience with it (as
+of *0.1.0-1*). Again, YMMV.
 
 ## Quickstart
 
@@ -32,9 +42,9 @@ $> vagrant up --provision
 ...
 
 $> vagrant ssh
-$vagrant> export PATH=/opt/anaconda/1.9.2/bin:${PATH}
+$vagrant> export PATH=/opt/anaconda/2.0.1/bin:${PATH}
 $vagrant> conda --version
-conda 3.4.1
+conda 3.5.5
 ```
 
 To use it in a cookbook:
