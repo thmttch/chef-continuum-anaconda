@@ -43,7 +43,9 @@ Vagrant.configure('2') do |config|
     }
 
     chef.run_list = [
-      'recipe[anaconda::default]',
+      #'recipe[anaconda::default]',
+      #'recipe[anaconda::shell-conveniences]',
+      'recipe[anaconda::package_tests]',
     ]
   end
 end
