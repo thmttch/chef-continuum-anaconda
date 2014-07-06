@@ -1,6 +1,12 @@
 # CHANGELOG
 
+## 0.3.1
+
+New resource: `anaconda_package`, for installing and removing packages via `conda`
+
 ## 0.3.0
+
+Rewrote all project history
 
 ## 0.2.1
 

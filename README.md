@@ -73,7 +73,15 @@ The following are user-configurable attributes. Check
 
 ### `recipe[anaconda::shell-conveniences]`
 
-Include this to have a 
+Include this to have a `source-me.sh` added to `${HOME}` which you can source
+on login. Useful for development.
+
+```bash
+$> vagrant ssh
+$vagrant> source source-me.sh
+$vagrant> which conda
+/opt/anaconda/2.0.1/bin/conda
+```
 
 ## Tests
 
