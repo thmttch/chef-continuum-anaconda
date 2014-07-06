@@ -26,6 +26,19 @@ shared_examples 'general tests' do |platform, version|
       expect(chef_run).to render_file(installer_config_path).with_content(/.*\n.*\n.*\n.*/)
     end
 
+    it 'exposes the conda_package resource' do
+      chef_run.converge('recipe[anaconda::package_tests]')
+
+      expect(chef_run).to install_conda_package('astroid')
+      expect(chef_run).to remove_conda_package('astroid')
+    end
+
+    it 'provides a convenience shell script' do
+      chef_run.converge('recipe[anaconda::shell-conveniences]')
+
+      expect(chef_run).to create_template("#{chef_run.node.anaconda.home}/source-me.sh")
+    end
+
   end
 end
 

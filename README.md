@@ -55,9 +55,8 @@ include_recipe 'anaconda::default'
 
 ## Usage, recipes, and attributes
 
-This cookbook only has one recipe: `anaconda::default`. Include
-it in your runlist, and it will install the package as well as any necessary
-dependencies.
+The main recipe is `anaconda::default`. Include it in your runlist, and it will
+install the package as well as any necessary dependencies.
 
 The following are user-configurable attributes. Check
 [attributes/default.rb](attributes/default.rb) for default values.
@@ -71,6 +70,18 @@ The following are user-configurable attributes. Check
     value will reject the license.
   - `owner`: the user who owns the install
   - `group`: the group who owns the install
+
+### `recipe[anaconda::shell-conveniences]`
+
+Include this to have a `source-me.sh` added to `${HOME}` which you can source
+on login. Useful for development.
+
+```bash
+$> vagrant ssh
+$vagrant> source source-me.sh
+$vagrant> which conda
+/opt/anaconda/2.0.1/bin/conda
+```
 
 ## Tests
 
