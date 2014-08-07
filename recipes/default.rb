@@ -15,7 +15,7 @@ flavor = node.anaconda.flavor
 
 anaconda_install_dir = "#{node.anaconda.install_root}/#{version}"
 installer = "Anaconda-#{version}-Linux-#{flavor}.sh"
-installer_path = "#{Chef::Config[:file_cach_path]}/#{installer}"
+installer_path = "#{Chef::Config[:file_cache_path]}/#{installer}"
 installer_config = 'installer_config'
 installer_config_path = "#{Chef::Config[:file_cache_path]}/#{installer_config}"
 
@@ -25,10 +25,16 @@ remote_file installer_path do
   source "http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/#{installer}"
   checksum node.anaconda.installer[version][flavor]
   notifies :run, 'bash[run anaconda installer]', :delayed
+  user node.anaconda.owner
+  group node.anaconda.group
+  mode 0755
+  action :create_if_missing
 end
 
 template installer_config_path do
   source "#{installer_config}.erb"
+  user node.anaconda.owner
+  group node.anaconda.group 
   variables({
     :version => version,
     :flavor => flavor,
