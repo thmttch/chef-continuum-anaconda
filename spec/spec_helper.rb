@@ -1,5 +1,7 @@
 # https://github.com/sethvargo/chefspec#reporting
 require 'chefspec'
+require 'chefspec/deprecations'
+
 ChefSpec::Coverage.start! do
 end
 

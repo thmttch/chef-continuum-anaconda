@@ -18,7 +18,8 @@ comprehensive testing across multiple platforms, with tests written in
 
 ## Requirements
 
-This repo has only been tested with RVM; YMMV with other installation methods (rbenv, chef-dk, etc).
+This repo has only been tested with RVM; YMMV with other installation methods
+(rbenv, chef-dk, etc).
 
 - Berkshelf 3.1.3
 - Chefspec 4.0.0
@@ -26,7 +27,8 @@ This repo has only been tested with RVM; YMMV with other installation methods (r
 - Foodcritic 4.0.0
 - Vagrant 1.6+
   - [vagrant-omnibus](https://github.com/schisamo/vagrant-omnibus)
-  - [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshelf): note that `>= 2.0.1` is required
+  - [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshelf): note
+    that `>= 2.0.1` is required
 
 It sounds like [Chef-DK](http://www.getchef.com/downloads/chef-dk/) is the new
 recommended installation path, but I have not had a good experience with it (as
@@ -43,6 +45,12 @@ $> vagrant up --provision
 
 $> vagrant ssh
 $vagrant> export PATH=/opt/anaconda/2.0.1/bin:${PATH}
+$vagrant> conda --version
+conda 3.5.5
+
+# if you included `recipe[anaconda::shell_conveniences]` you don't have to do anything;
+# it's sourced in /etc/profile.d
+$> vagrant ssh
 $vagrant> conda --version
 conda 3.5.5
 ```
@@ -71,14 +79,13 @@ The following are user-configurable attributes. Check
   - `owner`: the user who owns the install
   - `group`: the group who owns the install
 
-### `recipe[anaconda::shell-conveniences]`
+### `recipe[anaconda::shell_conveniences]`
 
-Include this to have a `source-me.sh` added to `${HOME}` which you can source
-on login. Useful for development.
+Include this to have the environment set for all users (login shells) via
+`/etc/profile.d`.  Useful for development.
 
 ```bash
 $> vagrant ssh
-$vagrant> source source-me.sh
 $vagrant> which conda
 /opt/anaconda/2.0.1/bin/conda
 ```
@@ -107,7 +114,11 @@ tests](test/integration/default/serverspec/default_spec.rb):
 
 ```bash
 # this is what takes so long: every platform and version is fully built in vagrant
+# the list of OSes is defined in [.kitchen.yml](.kitchen.yml)
 $> kitchen verify
+
+# test a specific OS; `kitchen list`
+$> kitchen verify default-ubuntu-1204
 ```
 
 Check the style with [Foodcritic](http://acrmp.github.io/foodcritic/):
