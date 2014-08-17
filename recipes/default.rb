@@ -8,7 +8,6 @@
 #
 
 include_recipe 'apt::default'
-include_recipe 'python::default'
 
 version = node.anaconda.version
 flavor = node.anaconda.flavor
@@ -34,7 +33,7 @@ end
 template installer_config_path do
   source "#{installer_config}.erb"
   user node.anaconda.owner
-  group node.anaconda.group 
+  group node.anaconda.group
   variables({
     :version => version,
     :flavor => flavor,

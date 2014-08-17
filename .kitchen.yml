@@ -9,9 +9,14 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
-  - name: ubuntu-12.10
-  - name: ubuntu-13.04
+#  - name: ubuntu-12.10
+#    driver:
+#      box: chef/ubuntu-11.10
+#  - name: ubuntu-13.04
+#    driver:
+#      box: chef/ubuntu-13.04
   - name: ubuntu-13.10
+  - name: ubuntu-14.04
 
 suites:
   - name: default

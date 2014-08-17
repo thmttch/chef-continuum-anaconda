@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-template "#{node.anaconda.home}/source-me.sh" do
+template '/etc/profile.d/anaconda-env.sh' do
   source 'source-me.sh.erb'
   variables({
     :install_root => node.anaconda.install_root,
