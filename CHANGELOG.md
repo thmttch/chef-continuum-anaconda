@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.4.2
+
+New resource 'anaconda_nbservice', for running an IPython notebook server.
+Somewhat experimental, it's fairly basic but usable.
+
 ## 0.4.1
 
 Hotfix release:

@@ -20,6 +20,8 @@ shared_examples 'general tests' do |platform, platform_version|
       # TODO doesn't work
       #stub_command('/opt/anaconda/2.0.1/bin/conda install astroid --yes').and_return(true)
       #stub_command('/opt/anaconda/2.0.1/bin/conda remove astroid --yes').and_return(true)
+
+      stub_command("rpm -qa | grep -q '^runit'").and_return(true)
     end
 
     it 'runs without errors. see test-kitchen tests for more comprehensive tests that are not possible here' do
@@ -37,18 +39,18 @@ shared_examples 'general tests' do |platform, platform_version|
       expect(chef_run).to render_file(installer_config_path).with_content(/.*\n.*\n.*\n.*/)
     end
 
-    it 'exposes the anaconda_package resource' do
+    it 'has the anaconda_package resource' do
       chef_run.converge('recipe[anaconda::package_tests]')
 
       package_name = 'astroid'
 
-      expect(chef_run).to install_conda_package(package_name)
+      expect(chef_run).to install_anaconda_package(package_name)
       # TODO we want this test, but needs to be stubbed
       #expect(chef_run).to run_execute("conda_package_install_#{package_name}").with(
         #command: '/opt/anaconda/2.0.1/bin/conda install astroid --yes'
       #)
 
-      expect(chef_run).to remove_conda_package(package_name)
+      expect(chef_run).to remove_anaconda_package(package_name)
       # TODO we want this test, but needs to be stubbed
       #expect(chef_run).to run_execute("conda_package_remove_#{package_name}").with(
         #command: '/opt/anaconda/2.0.1/bin/conda remove astroid --yes'
@@ -56,6 +58,12 @@ shared_examples 'general tests' do |platform, platform_version|
 
       # for coverage
       expect(chef_run).to write_log('do NOT include this in your runlist! for testing only.')
+    end
+
+    it 'has the anaconda_nbservice resource' do
+      chef_run.converge('recipe[anaconda::notebook_server]')
+
+      expect(chef_run).to create_anaconda_nbservice('notebook-server')
     end
 
     it 'provides a convenience shell script' do

@@ -49,6 +49,7 @@ Vagrant.configure('2') do |config|
     chef.run_list = [
       'recipe[anaconda::default]',
       'recipe[anaconda::shell_conveniences]',
+      'recipe[anaconda::notebook_server]',
     ]
 
     chef.custom_config_path = 'vagrant-solo.rb'

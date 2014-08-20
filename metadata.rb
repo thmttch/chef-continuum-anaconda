@@ -12,3 +12,4 @@ supports 'ubuntu', '= 13.10'
 supports 'ubuntu', '= 14.04'
 
 depends 'apt'
+depends 'runit'
