@@ -61,7 +61,7 @@ To use it in a cookbook:
 include_recipe 'anaconda::default'
 ```
 
-## Usage, recipes, and attributes
+## Usage, recipes, attributes, and resources
 
 The main recipe is `anaconda::default`. Include it in your runlist, and it will
 install the package as well as any necessary dependencies.
@@ -89,6 +89,23 @@ $> vagrant ssh
 $vagrant> which conda
 /opt/anaconda/2.0.1/bin/conda
 ```
+
+### resource `anaconda_package`
+
+You can use the `anaconda_package` resource to install new packages into the
+Anaconda environment:
+
+```ruby
+# I do not know what 'astroid' is, just using it as a sample package
+anaconda_package 'astroid' do
+  # the other supported action is `:remove`
+  action :install
+end
+```
+
+See the [resource definition](resources/package.rb) for additional options; in
+general, all it does is present the same options as `conda install`/`conda
+remove`.
 
 ## Tests
 
