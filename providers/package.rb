@@ -11,8 +11,8 @@ def is_installed?(package_name)
 end
 
 def log_opts(node)
-  if node.anaconda.install_log
-    "2>&1 >#{node.anaconda.install_log}"
+  if node.anaconda.install_logfile
+    "2>&1 >#{node.anaconda.install_logfile}"
   else
     ''
   end
