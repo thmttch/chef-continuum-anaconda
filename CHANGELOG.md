@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 0.4.1
+
+Hotfix release:
+
+- bad attribute name broke conda package installs and removes. Identified by
+  https://github.com/thmttch/chef-continuum-anaconda/issues/8, fixed by
+  https://github.com/thmttch/chef-continuum-anaconda/pull/9. Cheers to
+  @touchdown for the report.
+
 ## 0.4.0
 
 Major cleanup and basic usability fixes (read: almost not sure why it worked
