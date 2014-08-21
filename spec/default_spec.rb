@@ -6,7 +6,10 @@ shared_examples 'general tests' do |platform, version|
   context "on #{platform} #{version}" do
 
     let(:chef_run) do
-      ChefSpec::Runner.new(platform: platform, version: version) do |node|
+      ChefSpec::Runner.new(
+        platform: platform,
+        version: version,
+        step_into: [ 'anaconda_package' ]) do |node|
         #node.set['foo']['users'] = users
       end
     end
@@ -26,7 +29,7 @@ shared_examples 'general tests' do |platform, version|
       expect(chef_run).to render_file(installer_config_path).with_content(/.*\n.*\n.*\n.*/)
     end
 
-    it 'exposes the conda_package resource' do
+    it 'exposes the anaconda_package resource' do
       chef_run.converge('recipe[anaconda::package_tests]')
 
       expect(chef_run).to install_conda_package('astroid')
