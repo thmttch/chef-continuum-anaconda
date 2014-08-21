@@ -11,7 +11,7 @@ end
 
 describe 'general tests' do
 
-  it 'installs conda 2.0.1' do
+  it 'installs anaconda 2.0.1' do
     command('/opt/anaconda/2.0.1/bin/conda --version').should return_stdout 'conda 3.5.5'
   end
 
