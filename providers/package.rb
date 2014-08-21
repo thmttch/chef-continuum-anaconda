@@ -11,8 +11,8 @@ def is_installed?(package_name)
 end
 
 def log_opts(node)
-  if node.anaconda.install_logfile
-    "2>&1 >#{node.anaconda.install_logfile}"
+  if node.anaconda.package_logfile
+    "2>&1 >#{node.anaconda.package_logfile}"
   else
     ''
   end
@@ -50,7 +50,8 @@ action :install do
   ].join(" ")
 
   execute "conda_package_install_#{package_name}" do
-    command "#{cmd_conda} install #{package_name} #{cmd_opts} #{log_opts(node)}"
+    # the strip is for testing: matching stubs
+    command "#{cmd_conda} install #{package_name} #{cmd_opts} #{log_opts(node)}".strip
     only_if { !is_installed?(package_name) || r.force_install }
   end
 end
@@ -79,6 +80,6 @@ action :remove do
   ].join(' ')
 
   execute "conda_package_remove_#{package_name}" do
-    command "#{cmd_conda} remove #{package_name} #{cmd_opts} #{log_opts(node)}"
+    command "#{cmd_conda} remove #{package_name} #{cmd_opts} #{log_opts(node)}".strip
   end
 end

@@ -18,7 +18,7 @@ default.anaconda.installer = {
 # specific versions are installed _under_ this directory
 default.anaconda.install_root = '/opt/anaconda'
 default.anaconda.accept_license = 'no'
-default.anaconda.install_logfile = ''
+default.anaconda.package_logfile = nil
 
 default.anaconda.owner = 'vagrant'
 default.anaconda.group = 'vagrant'

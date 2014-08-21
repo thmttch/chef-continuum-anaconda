@@ -10,8 +10,14 @@ shared_examples 'general tests' do |platform, version|
         platform: platform,
         version: version,
         step_into: [ 'anaconda_package' ]) do |node|
+        #version: version) do |node|
         #node.set['foo']['users'] = users
       end
+    end
+
+    before do
+      stub_command('/opt/anaconda/2.0.1/bin/conda install astroid --yes').and_return(true)
+      stub_command('/opt/anaconda/2.0.1/bin/conda remove astroid --yes').and_return(true)
     end
 
     it 'runs without errors. see test-kitchen tests for more comprehensive tests that are not possible here' do
