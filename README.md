@@ -55,6 +55,10 @@ $vagrant> conda --version
 conda 3.5.5
 ```
 
+In addition, by default an IPython notebook server is enabled and started:
+
+  http://33.33.33.123:8888
+
 To use it in a cookbook:
 
 ```ruby
@@ -106,6 +110,49 @@ end
 See the [resource definition](resources/package.rb) for additional options; in
 general, all it does is present the same options as `conda install`/`conda
 remove`.
+
+### resource `anaconda_nbservice`
+
+The `anaconda_nbservice` will run an IPython notebook server as a runit
+service:
+
+```ruby
+anaconda_nbservice 'notebook-server' do
+  # listen on all interfaces; there will be a warning since security is
+  # disabled
+  ip '*'
+  port '8888'
+
+  user 'vagrant'
+  group 'vagrant'
+
+  install_dir '/opt/ipython/server'
+
+  service_action [ :enable, :start ]
+end
+```
+
+The standard configuration should be good enough, but you might need to write
+your own run service template:
+
+```ruby
+anaconda_nbservice 'server-with-custom-template' do
+  user ipython_user
+  group ipython_group
+
+  install_dir install_dir
+
+  template_cookbook 'your_cookbook'
+  # note that if your template name is TEMPLATE, then this value should be
+  # 'TEMPLATE", but the file should be 'sv-TEMPLATE-run.erb'
+  run_template_name 'your_template_name'
+  run_template_opts({
+    ...
+  })
+
+  service_action [ :enable, :start ]
+end
+```
 
 ## Tests
 

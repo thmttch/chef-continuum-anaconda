@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+pushd <%= @options[:notebook_dir] %>
+
+<% if @options[:pythonpath] %>
+  export PYTHONPATH="<%= @options[:pythonpath].join(':') %>"
+<% end %>
+
+<% if @options[:pythonstartup] %>
+  export OLD_PYTHONSTARTUP=${PYTHONSTARTUP}
+  export PYTHONSTARTUP="<%= @options[:pythonstartup] %>"
+<% end %>
+
+<% @options[:files_to_source].each do |f| %>
+  source <%= f %>
+<% end %>
+
+exec 2>&1
+exec \
+  <%= "chpst -u #{@options[:user]}" if @options[:user] %> \
+    <%= @options[:cmd_ipython] %> notebook \
+      --ipython-dir=<%= @options[:ipython_dir] %> \
+      --ip=<%= @options[:ip] %> \
+      --port=<%= @options[:port] %> \
+      --no-browser
