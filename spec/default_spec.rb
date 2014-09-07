@@ -81,6 +81,15 @@ shared_examples 'general tests' do |platform, platform_version|
       expect(chef_run).to create_remote_file_if_missing(installer_path)
     end
 
+    it 'has a workaround for python: https://github.com/thmttch/chef-continuum-anaconda/issues/12' do
+      pending('How do you include a cookbook for testing purposes only?')
+
+      chef_run.converge('python::default')
+      chef_run.converge(described_recipe)
+
+      # TODO test that python_pip[setuptools] is removed/disabled
+    end
+
   end
 end
 

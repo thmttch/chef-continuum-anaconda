@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 0.4.4
+
+Backwards-compatible fix for issue when using both the python cookbook and this
+one. Issue: https://github.com/thmttch/chef-continuum-anaconda/issues/12
+
+## 0.4.3
+
+Unintended release, thanks to Chef Supermarket's crappiness.
+
 ## 0.4.2
 
 New resource 'anaconda_nbservice', for running an IPython notebook server.
