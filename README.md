@@ -65,6 +65,13 @@ To use it in a cookbook:
 include_recipe 'anaconda::default'
 ```
 
+## Warning! If you're also using the [python](https://github.com/poise/python) cookbook...
+
+You MUST include `recipe[anaconda::python_workaround]`, otherwise subsequent
+chef runs will fail. See [the
+issue](https://github.com/thmttch/chef-continuum-anaconda/issues/12) for
+details.
+
 ## Usage, recipes, attributes, and resources
 
 The main recipe is `anaconda::default`. Include it in your runlist, and it will

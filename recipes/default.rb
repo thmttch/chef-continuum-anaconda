@@ -12,11 +12,6 @@ include_recipe 'apt::default'
 version = node.anaconda.version
 flavor = node.anaconda.flavor
 
-# hack: the standard python cookbook gets confused and tries to upgrade
-# setuptools since it can't find it; this will break the chef run.
-# explicitly set version to trick python into not upgrading setuptools
-node.force_default.python.setuptools_version = '3.6'
-
 anaconda_install_dir = "#{node.anaconda.install_root}/#{version}"
 installer = "Anaconda-#{version}-Linux-#{flavor}.sh"
 installer_path = "#{Chef::Config[:file_cache_path]}/#{installer}"
