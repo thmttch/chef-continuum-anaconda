@@ -82,10 +82,11 @@ shared_examples 'general tests' do |platform, platform_version|
     end
 
     it 'has a workaround for python: https://github.com/thmttch/chef-continuum-anaconda/issues/12' do
-      pending('How do you include a cookbook for testing purposes only?')
+      pending('How do you include a cookbook for testing purposes only? Needs python')
 
       chef_run.converge('python::default')
       chef_run.converge(described_recipe)
+      chef_run.converge('anaconda::python_workaround')
 
       # TODO test that python_pip[setuptools] is removed/disabled
     end

@@ -3,9 +3,8 @@
 
 Vagrant.configure('2') do |config|
   config.vm.hostname = 'anaconda-berkshelf'
+  # 14.04 LTS
   config.vm.box = 'ubuntu/trusty32'
-  #config.vm.box = 'precise32'
-  #config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
   config.vm.network :private_network, ip: '33.33.33.123'
 
   # ssh
@@ -14,8 +13,16 @@ Vagrant.configure('2') do |config|
 
   # plugins
   config.berkshelf.enabled = true
-  #config.berkshelf.berksfile_path = ''
   config.omnibus.chef_version = :latest
+
+  # vm tweaks
+  config.vm.provider :virtualbox do |vb|
+    #vb.memory = 1024
+    #vb.cpus = 2
+    # "no matter how much CPU is used in the VM, no more than 50% would be used on your own host machine"
+    # http://docs.vagrantup.com/v2/virtualbox/configuration.html
+    #vb.customize [ 'modifyvm', :id, '--cpuexecutioncap', '50' ]
+  end
 
   # provisioning
 
@@ -28,6 +35,10 @@ Vagrant.configure('2') do |config|
     'Anaconda-1.9.2-Linux-x86_64.sh',
     'Anaconda-2.0.1-Linux-x86.sh',
     'Anaconda-2.0.1-Linux-x86_64.sh',
+    'Anaconda-2.1.0-Linux-x86.sh',
+    'Anaconda-2.1.0-Linux-x86_64.sh',
+    'Anaconda-2.2.0-Linux-x86.sh',
+    'Anaconda-2.2.0-Linux-x86_64.sh',
   ].each do |f|
     if File.exists?(f)
       config.vm.provision :shell do |shell|
@@ -40,7 +51,7 @@ Vagrant.configure('2') do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :anaconda => {
-        #:version => '2.0.1',
+        #:version => '2.2.0',
         #:flavor => 'x86',
         :accept_license => 'yes',
       }
@@ -53,5 +64,6 @@ Vagrant.configure('2') do |config|
     ]
 
     chef.custom_config_path = 'vagrant-solo.rb'
+    #chef.log_level = :debug
   end
 end

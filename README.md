@@ -37,22 +37,23 @@ of *0.1.0-1*). Again, YMMV.
 ## Quickstart
 
 The [Vagrantfile](Vagrantfile) is written to get you an Anaconda environment
-with minimal effort:
+with minimal effort (though it will take at least a few minutes to download the
+Anaconda installer itself):
 
 ```bash
 $> vagrant up --provision
 ...
 
 $> vagrant ssh
-$vagrant> export PATH=/opt/anaconda/2.0.1/bin:${PATH}
+$vagrant> export PATH=/opt/anaconda/2.2.0/bin:${PATH}
 $vagrant> conda --version
-conda 3.5.5
+conda 3.10.0
 
 # if you included `recipe[anaconda::shell_conveniences]` you don't have to do anything;
 # it's sourced in /etc/profile.d
 $> vagrant ssh
 $vagrant> conda --version
-conda 3.5.5
+conda 3.10.0
 ```
 
 In addition, by default an IPython notebook server is enabled and started:
@@ -81,7 +82,14 @@ The following are user-configurable attributes. Check
 [attributes/default.rb](attributes/default.rb) for default values.
 
 - `anaconda`
-  - `version`: the version to install
+  - `version`: the version to install. Valid values are:
+    - 1.8.0
+    - 1.9.2
+    - 2.0.1
+    - 2.1.0
+    - 2.2.0
+    - miniconda-python2
+    - miniconda-python3
   - `flavor`: either `x86` (32-bit) or `x86_64` (64-bit)
   - `install_root`: the parent directory of all anaconda installs. note that
     individual installs go into `#{install_root}/#{version}`
@@ -119,6 +127,8 @@ general, all it does is present the same options as `conda install`/`conda
 remove`.
 
 ### resource `anaconda_nbservice`
+
+**This only works with a full Anaconda installation! I.e. the notebook service will not work out-of-the-box if installed with miniconda**
 
 The `anaconda_nbservice` will run an IPython notebook server as a runit
 service:

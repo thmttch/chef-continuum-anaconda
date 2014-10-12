@@ -2,7 +2,7 @@
 # Cookbook Name:: anaconda
 # Recipe:: default
 #
-# Copyright (C) 2014 Matt Chu
+# Copyright (C) 2015 Matt Chu
 #
 # All rights reserved - Do Not Redistribute
 #
@@ -13,21 +13,32 @@ version = node.anaconda.version
 flavor = node.anaconda.flavor
 
 anaconda_install_dir = "#{node.anaconda.install_root}/#{version}"
-installer = "Anaconda-#{version}-Linux-#{flavor}.sh"
+
+installer =
+  if 'miniconda-python2' == version
+    "Miniconda-latest-Linux-#{flavor}.sh"
+  elsif 'miniconda-python3' == version
+    "Miniconda3-latest-Linux-#{flavor}.sh"
+  else
+    "Anaconda-#{version}-Linux-#{flavor}.sh"
+  end
+Chef::Log.debug "installer = #{installer}"
+
 installer_path = "#{Chef::Config[:file_cache_path]}/#{installer}"
+installer_source = "#{node.anaconda.installer[version]['uri_prefix']}/#{installer}"
+installer_checksum = node.anaconda.installer[version][flavor]
+
 installer_config = 'installer_config'
 installer_config_path = "#{Chef::Config[:file_cache_path]}/#{installer_config}"
 
-Chef::Log.debug "installer = #{installer}"
-
 remote_file installer_path do
-  source "http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/#{installer}"
-  checksum node.anaconda.installer[version][flavor]
-  notifies :run, 'bash[run anaconda installer]', :delayed
+  source installer_source
+  checksum installer_checksum
   user node.anaconda.owner
   group node.anaconda.group
   mode 0755
   action :create_if_missing
+  notifies :run, 'bash[run anaconda installer]', :delayed
 end
 
 template installer_config_path do
