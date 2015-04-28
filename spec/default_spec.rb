@@ -6,13 +6,16 @@ shared_examples 'general tests' do |platform, platform_version|
   context "on #{platform} #{platform_version}" do
 
     let(:chef_run) do
-      ChefSpec::Runner.new(
+      ChefSpec::SoloRunner.new(
         platform: platform,
         # TODO get this working; that is, figure out how to stub this properly
         #version: platform_version,
         #step_into: [ 'anaconda_package' ]) do |node|
-        version: platform_version) do |node|
-        #node.set['foo']['users'] = users
+        version: platform_version
+      ) do |node|
+        # explicitly set the flavor for tests
+        # TODO test autodetection of x86 versus x86_64
+        node.set['anaconda']['flavor'] = 'x86_64'
       end
     end
 
@@ -82,7 +85,7 @@ shared_examples 'general tests' do |platform, platform_version|
     end
 
     it 'has a workaround for python: https://github.com/thmttch/chef-continuum-anaconda/issues/12' do
-      pending('How do you include a cookbook for testing purposes only? Needs python')
+      skip('How do you include a cookbook for testing purposes only? Needs python')
 
       chef_run.converge('python::default')
       chef_run.converge(described_recipe)
@@ -95,12 +98,14 @@ shared_examples 'general tests' do |platform, platform_version|
 end
 
 describe 'anaconda::default' do
+  # https://github.com/customink/fauxhai/tree/master/lib/fauxhai/platforms
   platforms = {
-    # for whatever reason there's no fauxhai data for 12.10
-    'ubuntu' => [ '12.04', '13.04', '13.10', '14.04' ],
-    'debian' => [ '6.0.5' ],
-    'centos' => [ '5.8', '6.0', '6.3' ],
-    'redhat' => [ '5.8', '6.3' ],
+    'ubuntu' => [ '12.04', '14.04', '15.04' ],
+    # TODO 7.9 and 8.2 were recently released
+    'debian' => [ '7.8', '8.1' ],
+    # TODO 6.7 is the latest
+    'centos' => [ '5.11', '6.6', '7.1.1503' ],
+    'redhat' => [ '5.9', '6.6', '7.1' ],
   }
 
   platforms.each do |platform, versions|

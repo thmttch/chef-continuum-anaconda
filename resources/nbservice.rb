@@ -6,9 +6,9 @@ attribute :name, :kind_of => String, :name_attribute => true
 attribute :service_action, :kind_of => Array
 
 attribute :ip, :kind_of => String
-attribute :port, :kind_of => String
+attribute :port, :kind_of => Fixnum
 
-attribute :user, :kind_of => String
+attribute :owner, :kind_of => String
 attribute :group, :kind_of => String
 
 attribute :install_dir, :kind_of => String

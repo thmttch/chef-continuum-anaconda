@@ -10,15 +10,13 @@
 include_recipe 'runit::default'
 
 anaconda_nbservice 'notebook-server' do
-  # listen on all interfaces; there will be a warning since security is
-  # disabled
-  ip '*'
-  port '8888'
+  ip node.anaconda.notebook.ip
+  port node.anaconda.notebook.port
 
-  user 'vagrant'
-  group 'vagrant'
+  owner node.anaconda.notebook.owner
+  group node.anaconda.notebook.group
 
-  install_dir '/opt/ipython/server'
+  install_dir node.anaconda.notebook.install_dir
 
   service_action [ :enable, :start ]
 end

@@ -13,3 +13,5 @@ supports 'ubuntu', '= 14.04'
 
 depends 'apt'
 depends 'runit'
+depends 'bzip2'
+depends 'tar'

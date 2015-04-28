@@ -1,5 +1,48 @@
 # CHANGELOG
 
+## 0.5.2 (unreleased)
+
+**This is a backwards-INCOMPATIBLE release**
+
+API, cookbook changes:
+
+- Refactored attributes to be cleaner and more readable
+- The user and group are now created if they don't exist, and by default are
+  installed under anaconda/anaconda
+- New attributes for configuring notebook server
+- The OS architecture (x86 versus x86_64) is now autodetected by default
+
+Platform, support changes:
+
+- Added support for Anaconda 2.3 (all pythons and all architectures)
+- Removed support for all Anacondas < 2.2.0
+
+Tools changes:
+
+- Migrated to chefdk 0.8.1
+  - upgraded gems
+  - updated chefspec
+  - updated documentation
+  - removed rbenv/rvm files
+
+Testing changes:
+
+- Moved to kitchen-docker for Docker-based testing, which is much much much
+  faster
+- Updated supported (tested) platforms:
+  - ubuntu:
+    - removed: 12.10, 13.04, 13.10
+    - added: 15.04
+  - debian:
+    - removed: 6.0.5
+    - added: 7.8, 8.1 (7.9 and 8.2 not in fauxhai yet)
+  - centos:
+    - removed: 5.8, 6.0, 6.3
+    - added: 5.11, 6.6, 7.1.1503
+  - redhat (chefspec only, no kitchen testing):
+    - removed: 5.8, 6.3
+    - added: 5.9, 6.6, 7.1.1503
+
 ## 0.5.1
 
 - Added support for Anaconda 2.2.0 with Python 3
