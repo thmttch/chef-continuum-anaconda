@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 0.5.0
+
+- Upgraded to Anaconda 2.2.0 from 2.0.1
+  - Includes support for Anaconda 2.1.0
+- Added support for [Miniconda](http://conda.pydata.org/miniconda.html)
+- Upgraded Vagrantfile:
+  - Upgraded Chef from 11.16+ to 12+ to match Kitchen tests
+  - Upgraded OS from 12.04 to 14.04
+
 ## 0.4.4
 
 Backwards-compatible fix for issue when using both the python cookbook and this

@@ -8,3 +8,5 @@ gem 'kitchen-vagrant'
 gem 'foodcritic'
 
 gem 'chef-rewind'
+
+gem 'nokogiri', '~> 1.5.0'

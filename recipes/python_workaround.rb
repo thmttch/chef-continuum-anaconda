@@ -2,7 +2,7 @@
 # Cookbook Name:: anaconda
 # Recipe:: python_workaround
 #
-# Copyright (C) 2014 Matt Chu
+# Copyright (C) 2015 Matt Chu
 #
 # All rights reserved - Do Not Redistribute
 #
