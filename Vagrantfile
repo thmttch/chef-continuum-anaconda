@@ -4,7 +4,7 @@
 Vagrant.configure('2') do |config|
   config.vm.hostname = 'anaconda-berkshelf'
   # 14.04 LTS
-  config.vm.box = 'ubuntu/trusty32'
+  config.vm.box = 'ubuntu/trusty64'
   config.vm.network :private_network, ip: '33.33.33.123'
 
   # ssh
@@ -39,6 +39,8 @@ Vagrant.configure('2') do |config|
     'Anaconda-2.1.0-Linux-x86_64.sh',
     'Anaconda-2.2.0-Linux-x86.sh',
     'Anaconda-2.2.0-Linux-x86_64.sh',
+    'Anaconda3-2.2.0-Linux-x86.sh',
+    'Anaconda3-2.2.0-Linux-x86_64.sh',
   ].each do |f|
     if File.exists?(f)
       config.vm.provision :shell do |shell|
@@ -51,8 +53,8 @@ Vagrant.configure('2') do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :anaconda => {
-        #:version => '2.2.0',
-        #:flavor => 'x86',
+        :version => '3-2.2.0',
+        :flavor => 'x86_64',
         :accept_license => 'yes',
       }
     }
