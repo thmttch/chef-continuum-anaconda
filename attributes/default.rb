@@ -26,6 +26,11 @@ default.anaconda.installer = {
     'x86' => '6437d5b08a19c3501f2f5dc3ae1ae16f91adf6bed0f067ef0806a9911b1bef15',
     'x86_64' => 'ca2582cb2188073b0f348ad42207211a2b85c10b244265b5b27bab04481b88a2',
   },
+  '3-2.2.0' => {
+    'uri_prefix' => 'https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com',
+    'x86' => '223655cd256aa912dfc83ab24570e47bb3808bc3b0c6bd21b5db0fcf2750883e',
+    'x86_64' => '4aac68743e7706adb93f042f970373a6e7e087dbf4b02ac467c94ca4ce33d2d1',
+  },
   'miniconda-python2' => {
     'uri_prefix' => 'https://repo.continuum.io/miniconda',
     # miniconda is always latest, so it doesn't have a stable checksum
