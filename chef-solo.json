@@ -1,0 +1,13 @@
+{
+  "anaconda": {
+    "owner": "root",
+    "group": "root",
+    "version": "2.2.0",
+    "flavor": "x86_64",
+    "accept_license": "yes"
+  },
+  "run_list": [
+    "anaconda::default",
+    "anaconda::shell_conveniences"
+  ]
+}
