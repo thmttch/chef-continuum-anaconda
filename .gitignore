@@ -20,3 +20,6 @@ bin/*
 
 # anaconda installs should not be checked in
 Anaconda-*-Linux-*.sh
+
+# OSX
+.DS_Store

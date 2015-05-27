@@ -19,6 +19,8 @@ installer =
     "Miniconda-latest-Linux-#{flavor}.sh"
   elsif 'miniconda-python3' == version
     "Miniconda3-latest-Linux-#{flavor}.sh"
+  elsif '3-2.2.0' == version
+    "Anaconda3-2.2.0-Linux-#{flavor}.sh"
   else
     "Anaconda-#{version}-Linux-#{flavor}.sh"
   end

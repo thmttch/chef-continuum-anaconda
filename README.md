@@ -88,6 +88,7 @@ The following are user-configurable attributes. Check
     - 2.0.1
     - 2.1.0
     - 2.2.0
+    - 3-2.2.0 (uses Python 3.4)
     - miniconda-python2
     - miniconda-python3
   - `flavor`: either `x86` (32-bit) or `x86_64` (64-bit)
