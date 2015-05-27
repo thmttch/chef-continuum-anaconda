@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.5.1
+
+- Added support for Anaconda 2.2.0 with Python 3
+  - Courtesy: https://github.com/nareynolds
+- Minor cleanup: remove unused file
+
 ## 0.5.0
 
 - Upgraded to Anaconda 2.2.0 from 2.0.1
