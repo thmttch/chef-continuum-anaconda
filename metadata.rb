@@ -4,7 +4,7 @@ maintainer_email 'matt.chu@gmail.com'
 license          'MIT'
 description      'Installs/Configures anaconda'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.5.1'
+version          '0.5.2'
 
 supports 'ubuntu', '= 12.04'
 supports 'ubuntu', '= 13.04'

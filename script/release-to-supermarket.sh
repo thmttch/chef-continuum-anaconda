@@ -3,13 +3,17 @@
 echo "Don't know how to automate this (creds), so here are the instructions:"
 echo ""
 
-echo 'BUMP METADATA.RB!!!! stop forgetting this'
+echo "cut a github release, checkout that tag locally"
 echo ""
 
-echo 'cut a github release, checkout that tag, then run the next command:'
+echo "use berkshelf to vendor a clean version of the cookbook, and update to supermarket"
 echo ""
-
-echo 'knife cookbook site share anaconda "Programming Languages" --cookbook-path PATH --config KNIFE.RB/${CHEF_PUB}'
+echo "berks vendor cookbooks"
+echo 'knife cookbook site share anaconda "Programming Languages" --cookbook-path cookbooks --config ${CHEF_PUB}'
 echo ""
-
 echo "https://docs.getchef.com/knife_cookbook_site.html#share"
+
+echo "BUMP METADATA.RB for next release! master is development"
+echo ""
+
+echo "https://supermarket.chef.io/cookbooks/anaconda"
