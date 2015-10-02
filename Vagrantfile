@@ -1,6 +1,3 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 Vagrant.configure('2') do |config|
   config.vm.hostname = 'anaconda-berkshelf'
   # 14.04 LTS
@@ -29,18 +26,14 @@ Vagrant.configure('2') do |config|
   # dev optimization: anaconda's big, so put it in the cache for development if
   # it's already been downloaded
   [
-    'Anaconda-1.8.0-Linux-x86.sh',
-    'Anaconda-1.8.0-Linux-x86_64.sh',
-    'Anaconda-1.9.2-Linux-x86.sh',
-    'Anaconda-1.9.2-Linux-x86_64.sh',
-    'Anaconda-2.0.1-Linux-x86.sh',
-    'Anaconda-2.0.1-Linux-x86_64.sh',
-    'Anaconda-2.1.0-Linux-x86.sh',
-    'Anaconda-2.1.0-Linux-x86_64.sh',
     'Anaconda-2.2.0-Linux-x86.sh',
     'Anaconda-2.2.0-Linux-x86_64.sh',
     'Anaconda3-2.2.0-Linux-x86.sh',
     'Anaconda3-2.2.0-Linux-x86_64.sh',
+    'Anaconda-2.3.0-Linux-x86.sh',
+    'Anaconda-2.3.0-Linux-x86_64.sh',
+    'Anaconda3-2.3.0-Linux-x86.sh',
+    'Anaconda3-2.3.0-Linux-x86_64.sh',
   ].each do |f|
     if File.exists?(f)
       config.vm.provision :shell do |shell|
@@ -53,8 +46,6 @@ Vagrant.configure('2') do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :anaconda => {
-        :version => '3-2.2.0',
-        :flavor => 'x86_64',
         :accept_license => 'yes',
       }
     }
@@ -69,3 +60,6 @@ Vagrant.configure('2') do |config|
     #chef.log_level = :debug
   end
 end
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :

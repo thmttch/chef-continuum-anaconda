@@ -18,8 +18,8 @@ bin/*
 .kitchen/
 .kitchen.local.yml
 
-# anaconda installs should not be checked in
-Anaconda-*-Linux-*.sh
+# local anaconda installers should not be checked in
+Anaconda*-*-Linux-*.sh
 
 # OSX
 .DS_Store

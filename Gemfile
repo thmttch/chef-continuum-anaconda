@@ -3,7 +3,10 @@ source 'https://rubygems.org'
 gem 'berkshelf'
 gem 'chefspec'
 
-gem 'kitchen-vagrant'
+gem 'test-kitchen'
+# removed in favor of kitchen-docker
+#gem 'kitchen-vagrant'
+gem 'kitchen-docker'
 
 gem 'foodcritic'
 

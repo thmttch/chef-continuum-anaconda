@@ -14,4 +14,3 @@ template '/etc/profile.d/anaconda-env.sh' do
     :version => node.anaconda.version,
   })
 end
-

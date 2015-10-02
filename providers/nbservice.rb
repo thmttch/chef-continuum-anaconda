@@ -20,17 +20,23 @@ end
 
 action :create do
   r = new_resource
+  # fill in any missing attributes with the defaults
+  ip = r.ip || node.anaconda.notebook.ip
+  port = r.port || node.anaconda.notebook.port
+  owner = r.owner || node.anaconda.notebook.owner
+  group = r.group || node.anaconda.notebook.group
+  install_dir = r.install_dir || node.anaconda.notebook.install_dir
 
-  directory r.install_dir do
-    owner r.user
-    group r.group
+  directory install_dir do
+    owner owner
+    group group
     recursive true
   end
 
-  ipython_dir = "#{r.install_dir}/.ipython"
+  ipython_dir = "#{install_dir}/.ipython"
   directory ipython_dir do
-    owner r.user
-    group r.group
+    owner owner
+    group group
     recursive true
   end
 
@@ -39,15 +45,12 @@ action :create do
   files_to_source = r.files_to_source || [ ]
   service_action = r.service_action || [ :enable, :start ]
 
-  ip = r.ip || '*'
-  port = r.port || '8888'
-
   template_cookbook = r.template_cookbook || 'anaconda'
   run_template_name = r.run_template_name || 'ipython-notebook'
   run_template_opts = r.run_template_opts || {
-    :user => r.user,
+    :owner => owner,
     :cmd_ipython => cmd_ipython(),
-    :notebook_dir => r.install_dir,
+    :notebook_dir => install_dir,
     :ipython_dir => ipython_dir,
     :ip => ip,
     :port => port,
