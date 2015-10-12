@@ -31,6 +31,8 @@ uses:
 - RSpec/[Chefspec](https://github.com/sethvargo/chefspec) for rapid testing;
   3.3.2
 
+**Note that the release process uses Chef 11 because of <https://github.com/chef/chef/issues/3888>**
+
 In addition:
 
 - [Vagrant](https://www.vagrantup.com) to provide an out-of-the-box working
