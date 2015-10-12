@@ -17,3 +17,5 @@ echo "BUMP METADATA.RB for next release! master is development"
 echo ""
 
 echo "https://supermarket.chef.io/cookbooks/anaconda"
+
+echo "ffs chef 12 supermarket release doesn't work; use chefdk = 0.3.6"

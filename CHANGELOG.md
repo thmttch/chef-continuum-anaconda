@@ -1,6 +1,17 @@
 # CHANGELOG
 
-## 0.6.0
+## 0.6.2
+
+First official 0.6.x release; see 0.6.0 changelog for details.
+
+Note that this reverts the release process back to using Chef 11.x/ChefDK 0.3.6
+because of <https://github.com/chef/chef/issues/3888>.
+
+## 0.6.1 (broken, untagged release thanks to ChefDK)
+
+Do not use.
+
+## 0.6.0 (unreleased thanks to ChefDK)
 
 **This is a backwards-INCOMPATIBLE release**
 
