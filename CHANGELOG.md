@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.6.3 (in development)
+
+fixes:
+
+- fix vagrant-trigger to correctly populate /var/chef/cache on provision
+
 ## 0.6.2
 
 First official 0.6.x release; see 0.6.0 changelog for details.

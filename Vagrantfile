@@ -23,24 +23,21 @@ Vagrant.configure('2') do |config|
 
   # provisioning
 
-  # dev optimization: anaconda's big, so put it in the cache for development if
-  # it's already been downloaded
-  [
-    'Anaconda-2.2.0-Linux-x86.sh',
-    'Anaconda-2.2.0-Linux-x86_64.sh',
-    'Anaconda3-2.2.0-Linux-x86.sh',
-    'Anaconda3-2.2.0-Linux-x86_64.sh',
-    'Anaconda-2.3.0-Linux-x86.sh',
-    'Anaconda-2.3.0-Linux-x86_64.sh',
-    'Anaconda3-2.3.0-Linux-x86.sh',
-    'Anaconda3-2.3.0-Linux-x86_64.sh',
-  ].each do |f|
-    if File.exists?(f)
-      config.vm.provision :shell do |shell|
-        shell.inline = 'if [[ ! -f $1 ]]; then cp $1 $2; fi'
-        shell.args = [ "/vagrant/#{f}",  '/var/chef/cache' ]
-      end
-    end
+  # dev optimization: anaconda installers are big, so put it in the guest's
+  # chef cache if it's available on the host
+  config.trigger.before :provision, :stdout => true do
+    run_remote <<-SCRIPT
+    VAGRANT_MOUNT=/vagrant/docker/container/installers
+
+    for f in $(ls ${VAGRANT_MOUNT}); do
+      echo "checking for ${f} in cache"
+      if [[ ! -f /var/chef/cache/${f} ]]; then
+        cp -v ${VAGRANT_MOUNT}/${f} /var/chef/cache
+      else
+        echo "${f} already in cache"
+      fi
+    done
+    SCRIPT
   end
 
   config.vm.provision :chef_solo do |chef|
