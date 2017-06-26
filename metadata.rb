@@ -4,7 +4,7 @@ maintainer_email  'matt.chu@gmail.com'
 license           'MIT'
 description       'Installs/Configures anaconda'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version           '0.6.3'
+version           '1.0.0'
 
 # TODO enable once release chefdk works for me
 #source_url        'https://github.com/thmttch/chef-continuum-anaconda'

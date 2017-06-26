@@ -6,6 +6,8 @@ default.anaconda.python = 'python2'
 default.anaconda.flavor = nil
 # either 'anaconda' or 'miniconda'
 default.anaconda.install_type = 'anaconda'
+# add system-wide path to profile.d?
+default.anaconda.system_path = false
 
 default.anaconda.installer_info = {
   'anaconda' => {
@@ -26,6 +28,18 @@ default.anaconda.installer_info = {
         'uri_prefix' => 'https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com',
         'x86' => '73fdbbb3e38207ed18e5059f71676d18d48fdccbc455a1272eb45a60376cd818',
         'x86_64' => '7c02499e9511c127d225992cfe1cd815e88fd46cd8a5b3cdf764f3fb4d8d4576',
+      },
+      'python3' => {
+        'uri_prefix' => 'https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com',
+        'x86' => '4cc10d65c303191004ada2b6d75562c8ed84e42bf9871af06440dd956077b555',
+        'x86_64' => '3be5410b2d9db45882c7de07c554cf4f1034becc274ec9074b23fd37a5c87a6f',
+      },
+    },
+    '4.4.0' => {
+      'python2' => {
+        'uri_prefix' => 'https://repo.continuum.io/archive',
+        'x86' => nil,
+        'x86_64' => nil,
       },
       'python3' => {
         'uri_prefix' => 'https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com',

@@ -5,7 +5,7 @@ Chef cookbook for installing [Continuum Analytic](http://continuum.io/)'s
 distribution for large-scale data processing, predictive analytics, and
 scientific computing". Specifically:
 
-- Anaconda 2.2 or 2.3
+- Anaconda 2.2 or 2.3, or 4.4.0
   - python2 or python3
   - x86 or x86_64
 - Miniconda
@@ -120,6 +120,7 @@ The following are user-configurable attributes. Check
     no defaults)**; any other value will reject the license.
   - `owner`: the user who owns the install
   - `group`: the group who owns the install
+  - `system_path`: adds the bin path to the system's profile.d directory
 
 ### `recipe[anaconda::shell_conveniences]`
 
