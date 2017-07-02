@@ -43,12 +43,12 @@ installer_info = node.anaconda.installer_info[install_type][version][python_vers
 # Miniconda3-latest-Linux-x86
 installer_basename =
   if install_type == 'anaconda'
-    "Anaconda#{python_version == 'python3' ? '3' : ''}-#{version}-Linux-#{flavor}.sh"
+    "Anaconda#{python_version == 'python3' ? '3' : (Gem::Version.new(version) >= Gem::Version.new('4.0.0') ? '2' : '')}-#{version}-Linux-#{flavor}.sh"
   else
     Chef::Log.debug "miniconda installs ONLY have version = latest; setting it now"
     node.anaconda.version = 'latest'
     version = 'latest'
-    "Miniconda#{python_version == 'python3' ? '3' : ''}-#{version}-Linux-#{flavor}.sh"
+    "Miniconda#{python_version == 'python3' ? '3' : '2'}-#{version}-Linux-#{flavor}.sh"
   end
 Chef::Log.debug "installer_basename = #{installer_basename}"
 
@@ -98,4 +98,12 @@ bash 'run anaconda installer' do
   group node.anaconda.group
   action :run
   not_if { File.directory?(anaconda_install_dir) }
+end
+
+# Add system-wide path to profile.d
+file '/etc/profile.d/anaconda.sh' do
+  content "export PATH=$PATH:#{anaconda_install_dir}/bin"
+  mode '0755'
+  owner 'root' 
+  only_if { node.anaconda.system_path }
 end
