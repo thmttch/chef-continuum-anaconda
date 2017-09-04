@@ -46,7 +46,7 @@ installer_basename =
     "Anaconda#{python_version == 'python3' ? '3' : (Gem::Version.new(version) >= Gem::Version.new('4.0.0') ? '2' : '')}-#{version}-Linux-#{flavor}.sh"
   else
     Chef::Log.debug "miniconda installs ONLY have version = latest; setting it now"
-    node.anaconda.version = 'latest'
+    node.default.anaconda.version = 'latest'
     version = 'latest'
     "Miniconda#{python_version == 'python3' ? '3' : '2'}-#{version}-Linux-#{flavor}.sh"
   end
