@@ -94,3 +94,6 @@ Vagrantfile
 # Travis #
 ##########
 .travis.yml
+
+# local anaconda installers should not be part of the cookbook
+Anaconda*-*-Linux-*.sh

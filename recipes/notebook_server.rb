@@ -10,13 +10,13 @@
 include_recipe 'runit::default'
 
 anaconda_nbservice 'notebook-server' do
-  ip node.anaconda.notebook.ip
-  port node.anaconda.notebook.port
+  ip node['anaconda']['notebook']['ip']
+  port node['anaconda']['notebook']['port']
 
-  owner node.anaconda.notebook.owner
-  group node.anaconda.notebook.group
+  owner node['anaconda']['notebook']['owner']
+  group node['anaconda']['notebook']['group']
 
-  install_dir node.anaconda.notebook.install_dir
+  install_dir node['anaconda']['notebook']['install_dir']
 
   service_action [ :enable, :start ]
 end

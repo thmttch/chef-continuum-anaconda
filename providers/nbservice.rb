@@ -3,7 +3,7 @@ def whyrun_supported?
 end
 
 def cmd_ipython
-  "#{node.anaconda.install_root}/#{node.anaconda.version}/bin/ipython"
+  "#{node['anaconda']['install_root']}/#{node['anaconda']['version']}/bin/ipython"
 end
 
 def is_installed?(package_name)
@@ -11,8 +11,8 @@ def is_installed?(package_name)
 end
 
 def log_opts(node)
-  if node.anaconda.install_log
-    "2>&1 >#{node.anaconda.install_log}"
+  if node['anaconda']['install_log']
+    "2>&1 >#{node['anaconda']['install_log']}"
   else
     ''
   end
@@ -21,11 +21,11 @@ end
 action :create do
   r = new_resource
   # fill in any missing attributes with the defaults
-  ip = r.ip || node.anaconda.notebook.ip
-  port = r.port || node.anaconda.notebook.port
-  owner = r.owner || node.anaconda.notebook.owner
-  group = r.group || node.anaconda.notebook.group
-  install_dir = r.install_dir || node.anaconda.notebook.install_dir
+  ip = r.ip || node['anaconda']['notebook']['ip']
+  port = r.port || node['anaconda']['notebook']['port']
+  owner = r.owner || node['anaconda']['notebook']['owner']
+  group = r.group || node['anaconda']['notebook']['group']
+  install_dir = r.install_dir || node['anaconda']['notebook']['install_dir']
 
   directory install_dir do
     owner owner
