@@ -5,7 +5,7 @@ Chef cookbook for installing [Continuum Analytic](http://continuum.io/)'s
 distribution for large-scale data processing, predictive analytics, and
 scientific computing". Specifically:
 
-- Anaconda 2.2 or 2.3, or 4.4.0
+- Anaconda 2.2, 2.3, 4.4.0, 5.0.1 (the default)
   - python2 or python3
   - x86 or x86_64
 - Miniconda
@@ -67,13 +67,13 @@ installer itself.
   # means conda is already in PATH via /etc/profile.d
   $> vagrant ssh
   $vagrant> conda --version
-  conda 3.14.1
+  conda 4.3.30
 
   # or you add it to PATH manually
   $> vagrant ssh
-  $vagrant> export PATH=/opt/anaconda/2.3.0/bin:${PATH}
+  $vagrant> export PATH=/opt/anaconda/5.0.1/bin:${PATH}
   $vagrant> conda --version
-  conda 3.14.1
+  conda 4.3.30
   ```
 
 It includes a Jupyter (IPython) notebook server accessible at <http://33.33.33.123:8888>
@@ -103,6 +103,8 @@ The following are user-configurable attributes. Check
   - `version`: the Anaconda version to install. Valid values are:
     - 2.2.0
     - 2.3.0
+    - 4.4.0
+    - 5.0.1
     - latest (for miniconda only)
   - `python`: which version of Python to install for. Valid values are:
     - python2
@@ -186,7 +188,13 @@ your own run service template:
   end
   ```
 
-## Tests
+## Developer setup and config
+
+install chef-dk; i installed using homebrew: https://github.com/chef/chef-dk
+
+eval "$(chef shell-init bash)" && script/cibuild
+
+### Tests
 
 To run the full test suite:
 
@@ -236,8 +244,6 @@ Standard stuff:
 
 ## TODO
 
-- add a pre-provision for kitchen tests to avoid redownloading the installer on
-  every test (really slows down the tests)
 - https://github.com/poise/python is now deprecated, in favor of
   https://github.com/poise/poise-python; see if the python workaround is still
   necessary

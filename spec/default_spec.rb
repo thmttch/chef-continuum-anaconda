@@ -8,14 +8,12 @@ shared_examples 'general tests' do |platform, platform_version|
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform: platform,
-        # TODO get this working; that is, figure out how to stub this properly
-        #version: platform_version,
-        #step_into: [ 'anaconda_package' ]) do |node|
         version: platform_version
       ) do |node|
-        # explicitly set the flavor for tests
+        # explicitly set the flavor and python version for tests
         # TODO test autodetection of x86 versus x86_64
-        node.set['anaconda']['flavor'] = 'x86_64'
+        node.normal['anaconda']['flavor'] = 'x86_64'
+        node.normal['anaconda']['python_version'] = 'python2'
       end
     end
 
@@ -75,10 +73,11 @@ shared_examples 'general tests' do |platform, platform_version|
       expect(chef_run).to create_template('/etc/profile.d/anaconda-env.sh')
     end
 
+    # TODO add a version of this test for python3
     it 'caches the installer template' do
       chef_run.converge(described_recipe)
 
-      installer = "Anaconda-#{chef_run.node.anaconda.version}-Linux-#{chef_run.node.anaconda.flavor}.sh"
+      installer = "Anaconda2-#{chef_run.node['anaconda']['version']}-Linux-#{chef_run.node['anaconda']['flavor']}.sh"
       installer_path = "#{Chef::Config[:file_cache_path]}/#{installer}"
 
       expect(chef_run).to create_remote_file_if_missing(installer_path)
@@ -100,12 +99,9 @@ end
 describe 'anaconda::default' do
   # https://github.com/customink/fauxhai/tree/master/lib/fauxhai/platforms
   platforms = {
-    'ubuntu' => [ '12.04', '14.04', '15.04' ],
-    # TODO 7.9 and 8.2 were recently released
-    'debian' => [ '7.8', '8.1' ],
-    # TODO 6.7 is the latest
-    'centos' => [ '5.11', '6.6', '7.1.1503' ],
-    'redhat' => [ '5.9', '6.6', '7.1' ],
+    'ubuntu' => [ '14.04', '16.04'  ],
+    'debian' => [ '8.9', '9.1' ],
+    'centos' => [ '6.9', '7.4.1708' ],
   }
 
   platforms.each do |platform, versions|

@@ -3,6 +3,8 @@ driver:
   # you can restore this if you want, but it'll be slooooooow
   #name: vagrant
   name: docker
+  # https://github.com/test-kitchen/kitchen-docker/issues/207
+  use_sudo: false
 driver_config:
   binary: /usr/local/bin/docker
   # install latest if not present
@@ -14,24 +16,22 @@ provisioner:
   name: chef_solo
 
 platforms:
-  # ubuntu: 2 LTS, and the latest
-  - name: ubuntu-12.04
   - name: ubuntu-14.04
-  - name: ubuntu-15.04
-  # debian: stable, oldstable
-  # TODO 7.9 and 8.2 were recently released
-  - name: debian-7.8
-  - name: debian-8.1
-  # centos
-  - name: centos-5.11
-  # TODO 6.7 is the latest
-  - name: centos-6.6
-  - name: centos-7.1.1503
-  # redhat: 5.9, 6.6, 7.1
-  # TODO what's the platform name in docker?
+  - name: ubuntu-16.04
+  - name: debian-8.9
+  - name: debian-9.2
+  - name: centos-6.9
+  - name: centos-7.4
 
 suites:
   - name: default
+    run_list:
+      - recipe[anaconda::default]
+    attributes:
+      anaconda:
+        flavor: 'x86_64'
+        accept_license: 'yes'
+  - name: nbservice
     run_list:
       - recipe[anaconda::default]
     attributes:

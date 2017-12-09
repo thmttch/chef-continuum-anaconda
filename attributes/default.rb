@@ -1,15 +1,15 @@
 # for miniconda this must be 'latest'
-default.anaconda.version = '2.3.0'
+default['anaconda']['version'] = '5.0.1'
 # the version of python: either 'python2' or 'python3'
-default.anaconda.python = 'python2'
+default['anaconda']['python'] = 'python2'
 # the architecture: nil to autodetect, or either 'x86' or 'x86_64'
-default.anaconda.flavor = nil
+default['anaconda']['flavor'] = nil
 # either 'anaconda' or 'miniconda'
-default.anaconda.install_type = 'anaconda'
+default['anaconda']['install_type'] = 'anaconda'
 # add system-wide path to profile.d?
-default.anaconda.system_path = false
+default['anaconda']['system_path'] = false
 
-default.anaconda.installer_info = {
+default['anaconda']['installer_info'] = {
   'anaconda' => {
     '2.2.0' => {
       'python2' => {
@@ -47,6 +47,18 @@ default.anaconda.installer_info = {
         'x86_64' => '3be5410b2d9db45882c7de07c554cf4f1034becc274ec9074b23fd37a5c87a6f',
       },
     },
+    '5.0.1' => {
+      'python2' => {
+        'uri_prefix' => 'https://repo.continuum.io/archive',
+        'x86' => nil,
+        'x86_64' => nil,
+      },
+      'python3' => {
+        'uri_prefix' => 'https://repo.continuum.io/archive',
+        'x86' => nil,
+        'x86_64' => nil,
+      },
+    },
   },
   'miniconda' => {
     'latest' => {
@@ -65,20 +77,20 @@ default.anaconda.installer_info = {
 }
 
 # specific versions are installed _under_ this directory
-default.anaconda.install_root = '/opt/anaconda'
-default.anaconda.accept_license = 'no'
-default.anaconda.package_logfile = nil
+default['anaconda']['install_root'] = '/opt/anaconda'
+default['anaconda']['accept_license'] = 'no'
+default['anaconda']['package_logfile'] = nil
 
-default.anaconda.owner = 'anaconda'
-default.anaconda.group = 'anaconda'
-default.anaconda.home = "/home/#{node.anaconda.owner}"
+default['anaconda']['owner'] = 'anaconda'
+default['anaconda']['group'] = 'anaconda'
+default['anaconda']['home'] = "/home/#{node['anaconda']['owner']}"
 
-default.anaconda.notebook = {
+default['anaconda']['notebook'] = {
   # by default, listens on all interfaces; there will be a warning since
   # security is disabled
   'ip' => '*',
   'port' => 8888,
-  'owner' => node.anaconda.owner,
-  'group' => node.anaconda.group,
+  'owner' => node['anaconda']['owner'],
+  'group' => node['anaconda']['group'],
   'install_dir' => '/opt/ipython/server',
 }
