@@ -6,6 +6,7 @@ Berksfile.lock
 \#*#
 .*.sw[a-z]
 *.un~
+/cookbook
 /cookbooks
 
 # Bundler
@@ -20,6 +21,9 @@ bin/*
 
 # local anaconda installers should not be checked in
 Anaconda*-*-Linux-*.sh
+
+# no logfiles
+*.log
 
 # OSX
 .DS_Store

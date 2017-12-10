@@ -50,13 +50,13 @@ default['anaconda']['installer_info'] = {
     '5.0.1' => {
       'python2' => {
         'uri_prefix' => 'https://repo.continuum.io/archive',
-        'x86' => nil,
-        'x86_64' => nil,
+        'x86' => '88c8d698fff16af15862daca10e94a0a46380dcffda45f8d89f5fe03f6bd2528',
+        'x86_64' => '23c676510bc87c95184ecaeb327c0b2c88007278e0d698622e2dd8fb14d9faa4',
       },
       'python3' => {
         'uri_prefix' => 'https://repo.continuum.io/archive',
-        'x86' => nil,
-        'x86_64' => nil,
+        'x86' => '991a4b656fcb0236864fbb27ff03bb7f3d98579205829b76b66f65cfa6734240',
+        'x86_64' => '55e4db1919f49c92d5abbf27a4be5986ae157f074bf9f8238963cd4582a4068a',
       },
     },
   },
