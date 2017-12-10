@@ -1,3 +1,5 @@
+use_inline_resources
+
 def whyrun_supported?
   true
 end
@@ -7,7 +9,7 @@ def cmd_conda
 end
 
 def is_installed?(package_name)
-  `"#{cmd_conda}" list`.include?(package_name)
+  Mixlib::ShellOut.new("#{cmd_conda} list").run_command.stdout.include?(package_name)
 end
 
 def log_opts(node)

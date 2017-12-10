@@ -18,6 +18,8 @@ include_recipe 'tar::default'
 group node['anaconda']['group']
 user node['anaconda']['owner'] do
   gid node['anaconda']['group']
+  home node['anaconda']['home']
+  manage_home true
 end
 
 version = node['anaconda']['version']

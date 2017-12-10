@@ -18,8 +18,8 @@ pushd <%= @options[:notebook_dir] %>
 exec 2>&1
 exec \
   <%= "chpst -u #{@options[:owner]}" if @options[:owner] %> \
-    <%= @options[:cmd_ipython] %> notebook \
-      --ipython-dir=<%= @options[:ipython_dir] %> \
+    <%= @options[:cmd_jupyter] %> notebook \
       --ip=<%= @options[:ip] %> \
       --port=<%= @options[:port] %> \
+      <%= "--NotebookApp.token='#{@options[:token]}'" if @options[:use_provided_token] %> \
       --no-browser

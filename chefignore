@@ -53,6 +53,7 @@ test/*
 features/*
 Guardfile
 Procfile
+*.log
 
 # SCM #
 #######
@@ -76,8 +77,8 @@ tmp
 
 # Cookbooks #
 #############
-CONTRIBUTING
-CHANGELOG*
+#CONTRIBUTING
+#CHANGELOG*
 
 # Strainer #
 ############
@@ -89,6 +90,7 @@ Strainerfile
 # Vagrant #
 ###########
 .vagrant
+vagrant-solo.rb
 Vagrantfile
 
 # Travis #
@@ -97,3 +99,5 @@ Vagrantfile
 
 # local anaconda installers should not be part of the cookbook
 Anaconda*-*-Linux-*.sh
+# install scripts don't need to be in the cookbook
+script

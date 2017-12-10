@@ -18,5 +18,7 @@ anaconda_nbservice 'notebook-server' do
 
   install_dir node['anaconda']['notebook']['install_dir']
 
+  token node['anaconda']['notebook']['token']
+
   service_action [ :enable, :start ]
 end

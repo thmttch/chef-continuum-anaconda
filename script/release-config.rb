@@ -5,4 +5,4 @@ log_location            STDOUT
 # https://blog.chef.io/2015/03/16/using-chef-supermarket-a-guided-tour/
 node_name               'thmttch'
 # this might not work with a relative path, and obviously is not checked in!
-client_key              'script/release-key.pem'
+client_key              '~/.ssh/chef-supermarket-release-key.pem'
