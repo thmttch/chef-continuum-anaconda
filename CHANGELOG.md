@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 0.7.1
+
+**This cookbook is now up for adoption! See CONTRIBUTING.md for details.**
+
+- Post release cleanup:
+  - release script and better document release process
+  - remove references to Chef DK
+- (WIP!) Update Vagrant instructions:
+  - Use Vagrant 2.0
+  - Update image to use Ubuntu 16.04 LTS (xenial), from 14.04 LTS
+- Lint/Quality
+  - Added CONTRIBUTING.md
+  - Added TESTING.md, and move content from README.md to that file
+  - Remove vim swapfiles from release, because chefignore doesn't seem to do
+    shit.
+- Added checksums for new 5.0 Anaconda installers
+
 ## 0.7.0
 
 Many, many changes and fixes to support both the latest Chef version and the

@@ -1,21 +1,23 @@
 #!/usr/bin/env bash
 
-echo "Don't know how to automate this (creds), so here are the instructions:"
-echo ""
+cat <<-INSTRUCTIONS
+Prep for release:
 
-echo "cut a github release, checkout that tag locally"
-echo ""
+1. Cut a github release
+2. Locally checkout the release tag
+3. If not available, log into Supermarket and generate a new key via Manage
+   Profile. Update release-config.rb accordingly.
 
-echo "use berkshelf to vendor a clean version of the cookbook, and update to supermarket"
-echo ""
-echo "berks vendor cookbooks"
-echo 'knife cookbook site share anaconda "Programming Languages" --cookbook-path cookbooks --config ${CHEF_PUB}'
-echo ""
-echo "https://docs.getchef.com/knife_cookbook_site.html#share"
+Upload to supermarket:
 
-echo "BUMP METADATA.RB for next release! master is development"
-echo ""
+# Use berkshelf to vendor a clean version of the cookbook; REMOVE ALL VIM
+# SWAPFILES! chefignore doesn't seem to do shit.
+$> find . -name *.swp | xargs -I[] rm -vf []
+$> berks vendor cookbooks
+# Upload to supermarket
+$> knife cookbook site share anaconda "Programming Languages" --cookbook-path cookbooks --supermarket-site https://supermarket.chef.io --config script/release-config.rb
 
-echo "https://supermarket.chef.io/cookbooks/anaconda"
+Post-release:
 
-echo "ffs chef 12 supermarket release doesn't work; use chefdk = 0.3.6"
+1. Bump metadata.rb version for next release! master is development
+INSTRUCTIONS

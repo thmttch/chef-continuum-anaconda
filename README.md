@@ -1,5 +1,7 @@
 # anaconda cookbook
 
+**This cookbook is now up for adoption! See CONTRIBUTING.md for details.**
+
 Chef cookbook for installing [Continuum Analytic](http://continuum.io/)'s
 [Anaconda](https://store.continuum.io/cshop/anaconda/): "completely free Python
 distribution for large-scale data processing, predictive analytics, and
@@ -12,46 +14,42 @@ scientific computing". Specifically:
   - python2 or python3
   - x86 or x86_64
 - Usage tested on Ubuntu, unittested on Debian, CentOS, and RedHat. See [rspec
-  tests](spec/default_spec.rb#L100) and [kitchen tests](.kitchen.yml#L16) for
+  tests](spec/default_spec.rb#L101) and [kitchen tests](.kitchen.yml#L18) for
   the full list.
 
 This also serves as an example for developing and testing Chef cookbooks. It
 uses:
 
-- [ChefDK](https://downloads.chef.io/chef-dk/); 0.8.1
-  - chef-client 12.4.4
-  - [Berkshelf](http://berkshelf.com) for dependency resolution; 3.3.0
+- ~[ChefDK](https://downloads.chef.io/chef-dk/)~ Given up on this for
+  now; uses standard RVM and Gemfile to manage installation
+  - chef-client 13.6
+  - [Berkshelf](http://berkshelf.com) for dependency resolution; 6.3
   - [Test Kitchen](https://github.com/test-kitchen/test-kitchen) for
     comprehensive testing across multiple platforms, with tests written in
-    [serverspec](http://serverspec.org); 1.4.2
+    [serverspec](http://serverspec.org); 1.19
     - Docker, with
       [kitchen-docker](https://github.com/portertech/kitchen-docker)
       integration
-  - [Foodcritic](http://acrmp.github.io/foodcritic/) for style checking; 5.0.0
-- RSpec/[Chefspec](https://github.com/sethvargo/chefspec) for rapid testing;
-  3.3.2
-
-**Note that the release process uses Chef 11 because of <https://github.com/chef/chef/issues/3888>**
+  - [Foodcritic](http://acrmp.github.io/foodcritic/) for style checking; 12.2
+- RSpec (3.7)/[Chefspec](https://github.com/sethvargo/chefspec) (7.1) for unit testing
 
 In addition:
 
 - [Vagrant](https://www.vagrantup.com) to provide an out-of-the-box working
-  example; 1.7.4
+  example; only tested with 2.0.
 
 ## Requirements
 
 If you want to just have a working Anaconda VM, install:
 
 - Vagrant
+  - [vagrant-triggers](https://github.com/emyl/vagrant-triggers)
 
 For the full experience (e.g. running the test suite), also install:
 
-- ChefDK
-  - [vagrant-omnibus](https://github.com/schisamo/vagrant-omnibus)
-  - [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshelf)
+- [vagrant-omnibus](https://github.com/schisamo/vagrant-omnibus)
+- [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshelf)
 - Docker
-  - Don't forget [Docker Machine](https://docs.docker.com/machine/) if you're
-    on OSX; installing this via homebrew is highly recommended.
 
 ## Quickstart
 
@@ -188,48 +186,9 @@ your own run service template:
   end
   ```
 
-## Developer setup and config
+## Developer setup, config, and tests
 
-install chef-dk; i installed using homebrew: https://github.com/chef/chef-dk
-
-eval "$(chef shell-init bash)" && script/cibuild
-
-### Tests
-
-To run the full test suite:
-
-  ```bash
-  # this will take a while, especially the first time
-  $> script/cibuild
-  ...
-
-  # check the final result; bash return codes: 0 is good, anything else is not
-  $> echo $?
-  ```
-
-- to run just the [chefspecs](spec/default_spec.rb):
-
-  ```bash
-  $> rspec
-  ```
-
-- to run just the test kitchen serverspec [integration
-  tests](test/integration/default/serverspec/default_spec.rb):
-
-  ```bash
-  # this is done via docker/kitchen-docker
-  # the list of OSes is defined in .kitchen.yml
-  $> kitchen verify
-
-  # test a specific OS; `kitchen list`
-  $> kitchen verify default-ubuntu-1204
-  ```
-
-- check for style issues with Foodcritic
-
-  ```bash
-  $> foodcritic
-  ```
+See [TESTING.md](TESTING.md) for details.
 
 ## Releases and issues
 
