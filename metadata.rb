@@ -4,7 +4,7 @@ maintainer_email  'matt.chu@gmail.com'
 license           'MIT'
 description       'Installs/Configures anaconda'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version           '0.7.0'
+version           '0.7.1'
 
 source_url        'https://github.com/thmttch/chef-continuum-anaconda'
 issues_url        'https://github.com/thmttch/chef-continuum-anaconda/issues'
