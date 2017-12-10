@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## 0.7.2
+
+**This is a backwards-INCOMPATIBLE release**
+
+- Catch up with ipython -> jupyter rebranding: renamed everything to juptyer.
+  This includes directories, attributes, and other backwards-incompatible
+  changes.
+- More fixes to release process: don't include unnecessary files during berkshelf
+  vendoring and release
+- Vagrant and notebook server fixes
+  - you can use attributes to set the notebook server's security token. _Be
+    careful with this config!_ It is disabled in the quickstart Vagrant setup
+    for convenience, and remains _enabled by default_.
+- Foodcritic fixes; resolves:
+  - FC017: LWRP does not notify when updated: anaconda/providers/nbservice.rb:21
+  - FC017: LWRP does not notify when updated: anaconda/providers/package.rb:21
+  - FC017: LWRP does not notify when updated: anaconda/providers/package.rb:58
+  - FC059: LWRP provider does not declare use_inline_resources: anaconda/providers/nbservice.rb:1
+  - FC059: LWRP provider does not declare use_inline_resources: anaconda/providers/package.rb:1
+  - FC048: Prefer Mixlib::ShellOut: ./providers/nbservice.rb:12
+  - FC048: Prefer Mixlib::ShellOut: ./providers/package.rb:12
+
 ## 0.7.1
 
 **This cookbook is now up for adoption! See CONTRIBUTING.md for details.**

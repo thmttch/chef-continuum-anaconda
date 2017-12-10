@@ -13,6 +13,9 @@ attribute :group, :kind_of => String
 
 attribute :install_dir, :kind_of => String
 
+attribute :use_provided_token, :kind_of => [TrueClass, FalseClass]
+attribute :token, :kind_of => String
+
 # if you really need it
 attribute :pythonpath, :kind_of => Array
 attribute :pythonstartup, :kind_of => String

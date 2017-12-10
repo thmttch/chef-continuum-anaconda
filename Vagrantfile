@@ -26,6 +26,9 @@ Vagrant.configure('2') do |config|
 
   # dev optimization: anaconda installers are big, so put it in the guest's
   # chef cache if it's available on the host
+  #
+  # TODO: need to increase the virtualbox disk space for the installers, eg
+  # https://unix.stackexchange.com/questions/176687/set-storage-size-on-creation-of-vm-virtualbox
   config.trigger.before :provision, :stdout => true do
     run_remote <<-SCRIPT
     VAGRANT_MOUNT=/vagrant/docker/container/installers
@@ -45,8 +48,14 @@ Vagrant.configure('2') do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      :anaconda => {
-        :accept_license => 'yes',
+      'anaconda' => {
+        'accept_license' => 'yes',
+        'notebook' => {
+          # set an empty security token, which effectively disables this
+          # security feature; this is for the quickstart Vagrant image ONLY!
+          'use_provided_token' => true,
+          'token' => '',
+        }
       }
     }
 
@@ -58,6 +67,7 @@ Vagrant.configure('2') do |config|
 
     chef.custom_config_path = 'vagrant-solo.rb'
     #chef.log_level = :debug
+    #chef.verbose_logging = true
   end
 end
 

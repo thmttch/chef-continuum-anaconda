@@ -40,5 +40,6 @@ To run the full test suite:
 - check for style issues with Foodcritic
 
   ```bash
-  $> foodcritic
+  # run on the project root dir
+  $> foodcritic .
   ```

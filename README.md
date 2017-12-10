@@ -74,7 +74,9 @@ installer itself.
   conda 4.3.30
   ```
 
-It includes a Jupyter (IPython) notebook server accessible at <http://33.33.33.123:8888>
+It includes a Jupyter notebook server accessible at
+<http://33.33.33.123:8888>. **Token authentication is disabled in the
+quickstart Vagrant setup.**
 
 Lastly, to use it in a cookbook:
 
@@ -158,7 +160,7 @@ The `anaconda_nbservice` will run a Jupyter notebook server as a runit service:
     ip '*'
     port '8888'
 
-    install_dir '/opt/ipython/server'
+    install_dir '/opt/jupyter/server'
 
     service_action [ :enable, :start ]
   end
@@ -169,8 +171,8 @@ your own run service template:
 
   ```ruby
   anaconda_nbservice 'server-with-custom-template' do
-    user ipython_user
-    group ipython_group
+    user jupyter_user
+    group jupyter_group
 
     install_dir install_dir
 

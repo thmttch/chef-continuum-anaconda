@@ -92,5 +92,9 @@ default['anaconda']['notebook'] = {
   'port' => 8888,
   'owner' => node['anaconda']['owner'],
   'group' => node['anaconda']['group'],
-  'install_dir' => '/opt/ipython/server',
+  'install_dir' => '/opt/jupyter/server',
+  # the default is to NOT set the security token, to ensure that a secure key
+  # is chosen and set
+  'use_provided_token' => false,
+  'token' => '',
 }
