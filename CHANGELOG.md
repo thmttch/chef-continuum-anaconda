@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## 0.7.3 (in development)
+
 ## 0.7.2
 
 **This is a backwards-INCOMPATIBLE release**
