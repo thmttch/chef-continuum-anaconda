@@ -7,7 +7,7 @@ Chef cookbook for installing [Continuum Analytic](http://continuum.io/)'s
 distribution for large-scale data processing, predictive analytics, and
 scientific computing". Specifically:
 
-- Anaconda 2.2, 2.3, 4.4.0, 5.0.1 (the default)
+- Anaconda 2.2, 2.3, 4.4.0, 5.0.1, 5.1.0, 5.2.0 (the default)
   - python2 or python3
   - x86 or x86_64
 - Miniconda

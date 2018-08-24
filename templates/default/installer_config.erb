@@ -19,8 +19,8 @@ The questions are:
 <%- when 'nothing here because no exceptions between different installers' %>
 <%- else %>
 
-<%# note the leading space below; it's necessary to get through the license agreement %>
- <%= @accept_license %>
+<%# note the 'q'; it's necessary to get through the license agreement (one space is not enough) %>
+q<%= @accept_license %>
 <%= @anaconda_install_dir %>
 <%= @add_to_shell_path %>
 <%- end %>

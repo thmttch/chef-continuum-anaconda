@@ -1,5 +1,5 @@
 # for miniconda this must be 'latest'
-default['anaconda']['version'] = '5.0.1'
+default['anaconda']['version'] = '5.2.0'
 # the version of python: either 'python2' or 'python3'
 default['anaconda']['python'] = 'python2'
 # the architecture: nil to autodetect, or either 'x86' or 'x86_64'
@@ -57,6 +57,30 @@ default['anaconda']['installer_info'] = {
         'uri_prefix' => 'https://repo.continuum.io/archive',
         'x86' => '991a4b656fcb0236864fbb27ff03bb7f3d98579205829b76b66f65cfa6734240',
         'x86_64' => '55e4db1919f49c92d5abbf27a4be5986ae157f074bf9f8238963cd4582a4068a',
+      },
+    },
+    '5.1.0' => {
+      'python2' => {
+        'uri_prefix' => 'https://repo.continuum.io/archive',
+        'x86' => '5af0c7a09a5f3aaf3666c0b362246d342d80e782128ef043998c9ead5ad41df7',
+        'x86_64' => '5f26ee92860d1dffdcd20910ff2cf75572c39d2892d365f4e867a611cca2af5b',
+      },
+      'python3' => {
+        'uri_prefix' => 'https://repo.continuum.io/archive',
+        'x86' => '0e940272517d8f8a6f26316a19e4be2bdaea8477a3a32cc2ecee7b48fd0fae84',
+        'x86_64' => '7e6785caad25e33930bc03fac4994a434a21bc8401817b7efa28f53619fa9c29',
+      },
+    },
+    '5.2.0' => {
+      'python2' => {
+        'uri_prefix' => 'https://repo.continuum.io/archive',
+        'x86' => '402758c24767e9eb3b77312c388725a058f76e03316464797c3ca404e6eebc2c',
+        'x86_64' => 'cb0d7a08b0e2cec4372033d3269979b4e72e2353ffd1444f57cb38bc9621219f',
+      },
+      'python3' => {
+        'uri_prefix' => 'https://repo.continuum.io/archive',
+        'x86' => 'f3527d085d06f35b6aeb96be2a9253ff9ec9ced3dc913c8e27e086329f3db588',
+        'x86_64' => '09f53738b0cd3bb96f5b1bac488e5528df9906be2480fe61df40e0e0d19e3d48',
       },
     },
   },
