@@ -61,7 +61,18 @@ installer_path = "#{Chef::Config[:file_cache_path]}/#{installer_basename}"
 # where to download the installer from
 installer_source = "#{installer_info['uri_prefix']}/#{installer_basename}"
 installer_checksum = installer_info[flavor]
+
+# If license is not accepted nothing at all is done
+#  - No directory creation
+#  - No package download
+#  - No error generated
+# This allow to include recipe and do nothing if the calling recipes does not want
+# anaconda (or xant to delete it)
 license_accepted = node.default[:anaconda][:accept_license] == "yes"
+
+# This file is created at the end of installation process, so if an error
+# occurs, installation restarts (which is not done if we only check if
+# destination directory exists).
 marker_file = "#{anaconda_install_dir}/.installed_by_chef_recipe"
 
 remote_file installer_path do
@@ -84,11 +95,15 @@ directory node['anaconda']['install_root'] do
 end
 
 bash 'run anaconda installer' do
+  # Uses installer options not an input file which bahaviour is
+  # somewhat random.
+  # -b No license asked, so no anwser to give.
+  # -u applies if a reinstall is asked. No effect if first install.
   code "bash #{installer_path} -b -p '#{anaconda_install_dir}' -u"
   user node['anaconda']['owner']
   group node['anaconda']['group']
   action :nothing
-  only_if { ! File.directory?(anaconda_install_dir) and license_accepted }
+  only_if { license_accepted }
 end
 
 # Add system-wide path to profile.d
