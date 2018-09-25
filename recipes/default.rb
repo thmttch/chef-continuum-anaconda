@@ -62,8 +62,18 @@ installer_path = "#{Chef::Config[:file_cache_path]}/#{installer_basename}"
 installer_source = "#{installer_info['uri_prefix']}/#{installer_basename}"
 installer_checksum = installer_info[flavor]
 
-installer_config = 'installer_config'
-installer_config_path = "#{Chef::Config[:file_cache_path]}/#{installer_config}"
+# If license is not accepted nothing at all is done
+#  - No directory creation
+#  - No package download
+#  - No error generated
+# This allow to include recipe and do nothing if the calling recipes does not want
+# anaconda (or want to delete it)
+license_accepted = node.default[:anaconda][:accept_license] == "yes"
+
+# This file is created at the end of installation process, so if an error
+# occurs, installation restarts (which is not done if we only check if
+# destination directory exists).
+marker_file = "#{anaconda_install_dir}/.installed_by_chef_recipe"
 
 remote_file installer_path do
   source installer_source
@@ -73,33 +83,27 @@ remote_file installer_path do
   mode 0755
   action :create_if_missing
   notifies :run, 'bash[run anaconda installer]', :delayed
-end
-
-template installer_config_path do
-  source "#{installer_config}.erb"
-  user node['anaconda']['owner']
-  group node['anaconda']['group']
-  variables({
-    :version => version,
-    :flavor => flavor,
-    :anaconda_install_dir => anaconda_install_dir,
-    :accept_license => node['anaconda']['accept_license'],
-    :add_to_shell_path => 'no',
-  })
+  only_if { license_accepted }
 end
 
 directory node['anaconda']['install_root'] do
   owner node['anaconda']['owner']
   group node['anaconda']['group']
   recursive true
+  only_if { license_accepted }
+  action :nothing
 end
 
 bash 'run anaconda installer' do
-  code "cat #{installer_config_path} | bash #{installer_path}"
+  # Uses installer options not an input file which bahaviour is
+  # somewhat random.
+  # -b No license asked, so no anwser to give.
+  # -u applies if a reinstall is asked. No effect if first install.
+  code "bash #{installer_path} -b -p '#{anaconda_install_dir}' -u"
   user node['anaconda']['owner']
   group node['anaconda']['group']
-  action :run
-  not_if { File.directory?(anaconda_install_dir) }
+  action :nothing
+  only_if { license_accepted }
 end
 
 # Add system-wide path to profile.d
@@ -108,4 +112,16 @@ file '/etc/profile.d/anaconda.sh' do
   mode '0755'
   owner 'root'
   only_if { node['anaconda']['system_path'] }
+  action :nothing
+end
+
+file marker_file do
+  content "Do not modify or remove. This is a marker file for CHEF"
+  user node['anaconda']['owner']
+  group node['anaconda']['group']
+  mode 0444
+  notifies :create, "directory[#{node['anaconda']['install_root']}]", :before
+  notifies :run, "bash[run anaconda installer]", :before
+  notifies :create, "file[/etc/profile.d/anaconda.sh]", :before
+  only_if { license_accepted }
 end

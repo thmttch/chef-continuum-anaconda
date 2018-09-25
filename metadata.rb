@@ -9,7 +9,7 @@ version           '0.7.3'
 source_url        'https://github.com/thmttch/chef-continuum-anaconda'
 issues_url        'https://github.com/thmttch/chef-continuum-anaconda/issues'
 
-chef_version '>= 13'
+chef_version '>= 12'
 
 supports 'ubuntu', '= 14.04'
 supports 'ubuntu', '= 16.04'

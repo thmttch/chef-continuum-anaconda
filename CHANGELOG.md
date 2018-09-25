@@ -2,11 +2,14 @@
 
 ## 0.7.3 (in development)
 
+- Added anaconda 5.1.0 and 5.2.0
+- Template changed to really skip the license text (one space is not sufficent)lms
+
 ## 0.7.2
 
 **This is a backwards-INCOMPATIBLE release**
 
-- Catch up with ipython -> jupyter rebranding: renamed everything to juptyer.
+- Catch up with ipython -> jupyter rebranding: renamed everything to jupyter.
   This includes directories, attributes, and other backwards-incompatible
   changes.
 - More fixes to release process: don't include unnecessary files during berkshelf
