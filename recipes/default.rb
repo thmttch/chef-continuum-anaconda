@@ -116,12 +116,12 @@ file '/etc/profile.d/anaconda.sh' do
 end
 
 file marker_file do
-    content "Do not modify or remove. This is a marker file for CHEF"
-    user node['anaconda']['owner']
-    group node['anaconda']['group']
-    mode 0444
-    notifies :create, "directory[#{node['anaconda']['install_root']}]", :before
-    notifies :run, "bash[run anaconda installer]", :before
-    notifies :create, "file[/etc/profile.d/anaconda.sh]", :before
-    only_if {license_accepted}
+  content "Do not modify or remove. This is a marker file for CHEF"
+  user node['anaconda']['owner']
+  group node['anaconda']['group']
+  mode 0444
+  notifies :create, "directory[#{node['anaconda']['install_root']}]", :before
+  notifies :run, "bash[run anaconda installer]", :before
+  notifies :create, "file[/etc/profile.d/anaconda.sh]", :before
+  only_if { license_accepted }
 end
