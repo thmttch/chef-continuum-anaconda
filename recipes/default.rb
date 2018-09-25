@@ -67,7 +67,7 @@ installer_checksum = installer_info[flavor]
 #  - No package download
 #  - No error generated
 # This allow to include recipe and do nothing if the calling recipes does not want
-# anaconda (or xant to delete it)
+# anaconda (or want to delete it)
 license_accepted = node.default[:anaconda][:accept_license] == "yes"
 
 # This file is created at the end of installation process, so if an error
@@ -83,7 +83,7 @@ remote_file installer_path do
   mode 0755
   action :create_if_missing
   notifies :run, 'bash[run anaconda installer]', :delayed
-  only_if {license_accepted}
+  only_if { license_accepted }
 end
 
 directory node['anaconda']['install_root'] do
