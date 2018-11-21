@@ -45,7 +45,8 @@ installer_info = node['anaconda']['installer_info'][install_type][version][pytho
 # Miniconda3-latest-Linux-x86
 installer_basename =
   if install_type == 'anaconda'
-    "Anaconda#{python_version == 'python3' ? '3' : (Gem::Version.new(version) >= Gem::Version.new('4.0.0') ? '2' : '')}-#{version}-Linux-#{flavor}.sh"
+    # the below line fixes the creation of the url that chef kitchen uses to install the anaconda.sh installer script
+    "Anaconda#{python_version == 'python3' ? '3' : ''}-#{version}-Linux-#{flavor}.sh"
   else
     Chef::Log.debug "miniconda installs ONLY have version = latest; setting it now"
     node.default['anaconda']['version'] = 'latest'
